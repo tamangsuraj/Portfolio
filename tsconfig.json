@@ -1,8 +1,11 @@
 {
   "files": [],
-  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ],
   "compilerOptions": {
-    "baseUrl": ".",
+    "baseUrl": "/",
     "paths": {
       "@/*": ["./src/*"]
     },
@@ -11,6 +14,10 @@
     "skipLibCheck": true,
     "allowJs": true,
     "noUnusedLocals": false,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "resolveJsonModule": true, // Allows importing JSON files as modules (if needed)
+    "esModuleInterop": true,  // Enables `import` statements for non-ES modules
+    "moduleResolution": "node"  // Helps to resolve modules correctly
   }
 }
+
