@@ -1,27 +1,28 @@
 {
   "compilerOptions": {
-    "target": "ESNext",                       // Use modern JS features
-    "module": "ESNext",                       // Use ES module system
-    "moduleResolution": "node",               // Resolve modules using Node resolution
-    "lib": ["DOM", "ESNext"],                 // Use the latest DOM and ES features
-    "strict": true,                           // Enable all strict type-checking options
-    "noImplicitAny": false,                   // Allow `any` type (you can set it to true if you want stricter checks)
-    "skipLibCheck": true,                     // Skip type checking of declaration files (helps with performance)
-    "allowJs": true,                          // Allow JavaScript files to be compiled
-    "resolveJsonModule": true,                // Allows importing `.json` files as modules
-    "esModuleInterop": true,                  // Enables compatibility for CommonJS modules
-    "baseUrl": ".",                           // Set base directory for module resolution
+    "target": "ESNext",                        // Use modern JS features
+    "module": "ESNext",                        // Use ES module system
+    "moduleResolution": "node",                // Resolve modules using Node resolution
+    "lib": ["DOM", "ESNext"],                  // Use the latest DOM and ES features
+    "strict": true,                            // Enable all strict type-checking options
+    "noImplicitAny": false,                    // Allow `any` type (you can set it to true if you want stricter checks)
+    "skipLibCheck": true,                      // Skip type checking of declaration files (helps with performance)
+    "allowJs": true,                           // Allow JavaScript files to be compiled
+    "resolveJsonModule": true,                 // Allows importing `.json` files as modules
+    "esModuleInterop": true,                   // Enables compatibility for CommonJS modules
+    "baseUrl": ".",                            // Set base directory for module resolution
     "paths": {
-      "@/*": ["src/*"]                        // Alias for src/ folder for easier imports
+      "@/*": ["src/*"]                         // Alias for src/ folder for easier imports
     },
-    "outDir": "./dist",                       // Output compiled files to `dist` folder
-    "jsx": "react-jsx",                       // Enable JSX support for React 17+ (automatic JSX transformation)
-    "noUnusedLocals": false,                  // Allow unused local variables (you can set this to `true` for stricter checking)
-    "noUnusedParameters": false,              // Allow unused function parameters (you can set this to `true` for stricter checking)
-    "strictNullChecks": false,                // Disable strict null checks (set to `true` for stricter checking)
-    "resolveJsonModule": true,                // Enable importing of JSON modules
-    "allowSyntheticDefaultImports": true     // Allow importing modules without a default export
+    "outDir": "./dist",                        // Output compiled files to `dist` folder
+    "jsx": "react-jsx",                        // Enable JSX support for React 17+ (automatic JSX transformation)
+    "noUnusedLocals": false,                   // Allow unused local variables (you can set this to `true` for stricter checking)
+    "noUnusedParameters": false,               // Allow unused function parameters (you can set this to `true` for stricter checking)
+    "strictNullChecks": false,                 // Disable strict null checks (set to `true` for stricter checking)
+    "allowSyntheticDefaultImports": true,      // Allow importing modules without a default export
+    "allowImportingTsExtensions": true,        // Allow importing TypeScript files without extensions
+    "noEmit": true                             // Add this line to allow 'allowImportingTsExtensions'
   },
-  "include": ["src/**/*", "index.tsx"],       // Include all files in the `src` folder and entry point `index.tsx`
-  "exclude": ["node_modules", "dist"]         // Exclude `node_modules` and `dist` from TypeScript compilation
+  "include": ["src/**/*", "index.tsx"],        // Include all files in the `src` folder and entry point `index.tsx`
+  "exclude": ["node_modules", "dist"]          // Exclude `node_modules` and `dist` from TypeScript compilation
 }
