@@ -13,20 +13,40 @@ import { Footer } from '@/components/Footer';
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+      {/* Background Animation */}
       <ParticleBackground />
+
+      {/* Main Navigation */}
       <Navigation />
-      
+
+      {/* Main Content */}
       <main>
+        {/* Hero Section */}
         <HeroSection />
+
+        {/* About Me Section */}
         <AboutSection />
+
+        {/* Experience Section */}
         <ExperienceSection />
+
+        {/* Portfolio Section */}
         <PortfolioSection />
+
+        {/* Skills Section */}
         <SkillsSection />
+
+        {/* Blog Section */}
         <BlogSection />
+
+        {/* Testimonials Section */}
         <TestimonialsSection />
+
+        {/* Contact Section */}
         <ContactSection />
       </main>
-      
+
+      {/* Footer Section */}
       <Footer />
     </div>
   );

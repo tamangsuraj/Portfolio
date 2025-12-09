@@ -2,27 +2,32 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
-// https://vitejs.dev/config/
+// IMPORTANT: You are using a custom domain (suraj-tamang.com.np)
+// Therefore, base MUST be "/"  
+// (Only GitHub username pages need a subpath.)
 export default defineConfig({
-  server: {
-    host: "0.0.0.0",      // Ensures that the server is accessible externally (if needed)
-    port: 8080,           // Port for the dev server
-    strictPort: true,     // Ensures that the server uses only the specified port
-    fs: {
-      allow: [path.resolve(__dirname, "../")]  // Allow Vite to serve files outside of the default directory (e.g., index.html)
-    },
-  },
+  base: "/Portfolio",   // ✔ Correct for custom domain
+
   plugins: [react()],
+
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),  // Alias for easier imports from the src folder
+      "@": path.resolve(__dirname, "./src"),
     },
   },
-  optimizeDeps: {
-    include: ["react", "react-dom"], // Ensure dependencies are optimized
+
+  server: {
+    host: "0.0.0.0",
+    port: 8080,
   },
+
+  optimizeDeps: {
+    include: ["react", "react-dom"],
+  },
+
   build: {
-    target: "esnext",  // Ensure modern JS features are targeted
-    minify: "esbuild", // Minify the code with esbuild
+    target: "esnext",
+    minify: "esbuild",
+    outDir: "dist",
   },
 });
