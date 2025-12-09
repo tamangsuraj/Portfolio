@@ -1,23 +1,27 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
   "compilerOptions": {
-    "baseUrl": "/",
+    "target": "ESNext",                       // Use modern JS features
+    "module": "ESNext",                       // Use ES module system
+    "moduleResolution": "node",               // Resolve modules using Node resolution
+    "lib": ["DOM", "ESNext"],                 // Use the latest DOM and ES features
+    "strict": true,                           // Enable all strict type-checking options
+    "noImplicitAny": false,                   // Allow `any` type (you can set it to true if you want stricter checks)
+    "skipLibCheck": true,                     // Skip type checking of declaration files (helps with performance)
+    "allowJs": true,                          // Allow JavaScript files to be compiled
+    "resolveJsonModule": true,                // Allows importing `.json` files as modules
+    "esModuleInterop": true,                  // Enables compatibility for CommonJS modules
+    "baseUrl": ".",                           // Set base directory for module resolution
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["src/*"]                        // Alias for src/ folder for easier imports
     },
-    "noImplicitAny": false,
-    "noUnusedParameters": false,
-    "skipLibCheck": true,
-    "allowJs": true,
-    "noUnusedLocals": false,
-    "strictNullChecks": false,
-    "resolveJsonModule": true, // Allows importing JSON files as modules (if needed)
-    "esModuleInterop": true,  // Enables `import` statements for non-ES modules
-    "moduleResolution": "node"  // Helps to resolve modules correctly
-  }
+    "outDir": "./dist",                       // Output compiled files to `dist` folder
+    "jsx": "react-jsx",                       // Enable JSX support for React 17+ (automatic JSX transformation)
+    "noUnusedLocals": false,                  // Allow unused local variables (you can set this to `true` for stricter checking)
+    "noUnusedParameters": false,              // Allow unused function parameters (you can set this to `true` for stricter checking)
+    "strictNullChecks": false,                // Disable strict null checks (set to `true` for stricter checking)
+    "resolveJsonModule": true,                // Enable importing of JSON modules
+    "allowSyntheticDefaultImports": true     // Allow importing modules without a default export
+  },
+  "include": ["src/**/*", "index.tsx"],       // Include all files in the `src` folder and entry point `index.tsx`
+  "exclude": ["node_modules", "dist"]         // Exclude `node_modules` and `dist` from TypeScript compilation
 }
-
