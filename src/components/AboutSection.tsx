@@ -44,7 +44,7 @@ export const AboutSection = () => {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="relative"
           >
             <div className="relative aspect-square max-w-md mx-auto">
@@ -52,7 +52,7 @@ export const AboutSection = () => {
               <motion.div
                 className="absolute inset-0 rounded-2xl border-2 border-primary/30"
                 animate={{ rotate: [0, 2, 0, -2, 0] }}
-                transition={{ duration: 10, repeat: Infinity }}
+                transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
                 style={{ transform: 'translate(20px, 20px)' }}
               />
 
@@ -63,6 +63,8 @@ export const AboutSection = () => {
                     src={profilePhoto}
                     alt="Suraj Tamang"
                     className="w-full h-full object-cover rounded-full"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
 
@@ -70,7 +72,7 @@ export const AboutSection = () => {
                 <motion.div
                   className="absolute -bottom-4 -right-4 bg-card border border-border rounded-xl px-4 py-2 shadow-lg"
                   animate={{ y: [0, -5, 0] }}
-                  transition={{ duration: 3, repeat: Infinity }}
+                  transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
                 >
                   <p className="text-sm font-medium text-foreground">3+ years experience</p>
                   <p className="text-xs text-muted-foreground">DevOps Engineer</p>
@@ -83,7 +85,7 @@ export const AboutSection = () => {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2 }}
+            transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
           >
             <span className="text-primary font-medium text-sm tracking-wider uppercase">
               About Me
@@ -96,7 +98,7 @@ export const AboutSection = () => {
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.4 }}
+                transition={{ delay: 0.3, duration: 0.5, ease: "easeOut" }}
               >
                 I'm a DevOps Engineer passionate about building and automating scalable cloud
                 infrastructure. With expertise in Kubernetes, CI/CD pipelines, and cloud platforms,
@@ -105,7 +107,7 @@ export const AboutSection = () => {
               <motion.p
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ delay: 0.5 }}
+                transition={{ delay: 0.4, duration: 0.5, ease: "easeOut" }}
               >
                 My approach combines technical excellence with a deep understanding of
                 development workflows, ensuring that infrastructure supports rather than
@@ -120,7 +122,7 @@ export const AboutSection = () => {
                   key={item.label}
                   initial={{ opacity: 0, y: 20 }}
                   animate={isInView ? { opacity: 1, y: 0 } : {}}
-                  transition={{ delay: 0.6 + index * 0.1 }}
+                  transition={{ delay: 0.5 + index * 0.08, duration: 0.4, ease: "easeOut" }}
                   className="glass-card rounded-xl p-4 hover-lift"
                 >
                   <item.icon className="h-8 w-8 text-primary mb-2" />

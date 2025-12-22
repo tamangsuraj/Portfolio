@@ -19,7 +19,8 @@ const App = () => {
         <Sonner />
 
         {/* Set up React Router for page navigation */}
-        <BrowserRouter basename="/Portfolio">  {/* Replace 'Portfolio' with your repo name */}
+        {/* No basename needed for custom domain (serves from root) */}
+        <BrowserRouter>
           <Routes>
             {/* Define the homepage route */}
             <Route path="/" element={<Index />} />

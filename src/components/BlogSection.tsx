@@ -104,7 +104,7 @@ export const BlogSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
           className="flex flex-wrap justify-center gap-3 mb-12"
         >
           {categories.map((category) => (
@@ -112,73 +112,87 @@ export const BlogSection = () => {
               key={category}
               variant={activeFilter === category ? 'default' : 'outline'}
               onClick={() => setActiveFilter(category)}
-              className={`rounded-full px-6 ${activeFilter === category
-                ? 'bg-primary text-primary-foreground'
-                : 'border-border hover:border-primary hover:text-primary'
-                }`}
+              className="relative rounded-full px-6 overflow-hidden group"
             >
-              {category}
+              {activeFilter === category && (
+                <motion.div
+                  layoutId="active-pill-blog"
+                  className="absolute inset-0 bg-primary"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+              <span className={`relative z-10 transition-colors duration-300 ${activeFilter === category ? 'text-primary-foreground' : 'group-hover:text-primary'}`}>
+                {category}
+              </span>
             </Button>
           ))}
         </motion.div>
 
         {/* Blog Grid */}
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence mode="popLayout">
+        <motion.div
+          layout
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <AnimatePresence mode="popLayout" initial={false}>
             {filteredPosts.map((post, index) => (
               <motion.article
                 key={post.id}
                 layout
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                className="group glass-card rounded-2xl overflow-hidden hover-lift cursor-pointer"
+                initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                animate={{
+                  opacity: 1,
+                  y: 0,
+                  scale: 1,
+                }}
+                exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.2 } }}
+                transition={{
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 25,
+                  delay: index * 0.05
+                }}
+                className="group glass-card rounded-2xl overflow-hidden hover-lift cursor-pointer border-border/40 hover:border-primary/40"
               >
                 {/* Image */}
-                <div className={`h-40 bg-gradient-to-br ${post.color} relative overflow-hidden`}>
+                <div className={`h-48 bg-gradient-to-br ${post.color} relative overflow-hidden`}>
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <motion.div
-                    className="absolute inset-0 bg-primary/5"
-                    whileHover={{ scale: 1.1 }}
-                    transition={{ duration: 0.4 }}
-                  />
+                  <div className="absolute inset-0 bg-background/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </div>
 
                 {/* Content */}
                 <div className="p-6">
-                  <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
-                    <span className="flex items-center gap-1">
-                      <Calendar size={12} />
+                  <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-muted-foreground mb-4">
+                    <span className="flex items-center gap-1.5 opacity-70">
+                      <Calendar size={12} className="text-primary" />
                       {post.date}
                     </span>
-                    <span className="flex items-center gap-1">
-                      <Clock size={12} />
+                    <span className="flex items-center gap-1.5 opacity-70">
+                      <Clock size={12} className="text-primary" />
                       {post.readTime}
                     </span>
                   </div>
 
-                  <span className="text-xs font-medium text-primary uppercase tracking-wider">
+                  <span className="text-xs font-bold text-primary uppercase tracking-wider">
                     {post.category}
                   </span>
 
-                  <h3 className="font-heading text-lg font-semibold mt-2 mb-3 text-foreground group-hover:text-primary transition-colors line-clamp-2">
+                  <h3 className="font-heading text-lg font-bold mt-2 mb-3 text-foreground group-hover:text-primary transition-colors line-clamp-2 leading-tight">
                     {post.title}
                   </h3>
 
-                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
+                  <p className="text-sm text-muted-foreground mb-6 line-clamp-2 opacity-80">
                     {post.excerpt}
                   </p>
 
                   <motion.span
-                    className="inline-flex items-center gap-1 text-sm font-medium text-primary"
-                    whileHover={{ x: 5 }}
+                    className="inline-flex items-center gap-2 text-sm font-bold text-primary group-hover:gap-3 transition-all"
                   >
-                    Read More <ArrowRight size={14} />
+                    Read More <ArrowRight size={16} />
                   </motion.span>
                 </div>
               </motion.article>

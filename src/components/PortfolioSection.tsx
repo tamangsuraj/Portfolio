@@ -72,7 +72,7 @@ export const PortfolioSection = () => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.2 }}
           className="flex flex-wrap justify-center gap-3 mb-12"
         >
           {categories.map((category) => (
@@ -80,27 +80,50 @@ export const PortfolioSection = () => {
               key={category}
               variant={activeFilter === category ? 'default' : 'outline'}
               onClick={() => setActiveFilter(category)}
-              className={`rounded-full px-6 ${activeFilter === category
-                ? 'bg-primary text-primary-foreground'
-                : 'border-border hover:border-primary hover:text-primary'
-                }`}
+              className="relative rounded-full px-6 overflow-hidden group"
             >
-              {category}
+              {activeFilter === category && (
+                <motion.div
+                  layoutId="active-pill"
+                  className="absolute inset-0 bg-primary"
+                  transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                />
+              )}
+              <span className={`relative z-10 transition-colors duration-300 ${activeFilter === category ? 'text-primary-foreground' : 'group-hover:text-primary'}`}>
+                {category}
+              </span>
             </Button>
           ))}
         </motion.div>
 
         {/* Projects Grid */}
-        <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <AnimatePresence mode="popLayout">
+        <motion.div
+          layout
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        >
+          <AnimatePresence mode="popLayout" initial={false}>
             {filteredProjects.map((project, index) => (
               <motion.article
                 key={project.id}
                 layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
+                initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                animate={{
+                  opacity: 1,
+                  scale: 1,
+                  y: 0,
+                }}
+                exit={{
+                  opacity: 0,
+                  scale: 0.9,
+                  transition: { duration: 0.3 }
+                }}
+                transition={{
+                  type: "spring",
+                  stiffness: 260,
+                  damping: 25,
+                  delay: index * 0.05 // Reduced delay for snappier feel
+                }}
                 className="group glass-card rounded-2xl overflow-hidden hover-lift"
               >
                 {/* Project Image/Preview */}
@@ -108,22 +131,22 @@ export const PortfolioSection = () => {
                   <img
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
 
                   {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-background/90 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+                  <div className="absolute inset-0 bg-background/90 opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-4">
                     <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="p-3 rounded-full bg-primary text-primary-foreground"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="p-3 rounded-full bg-primary text-primary-foreground shadow-lg"
                     >
                       <ExternalLink size={20} />
                     </motion.button>
                     <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="p-3 rounded-full bg-secondary text-foreground"
+                      whileHover={{ scale: 1.1, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="p-3 rounded-full bg-secondary text-foreground shadow-lg"
                     >
                       <Github size={20} />
                     </motion.button>
@@ -138,7 +161,7 @@ export const PortfolioSection = () => {
                   <h3 className="font-heading text-xl font-semibold mt-1 mb-3 text-foreground group-hover:text-primary transition-colors">
                     {project.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground mb-4">
+                  <p className="text-sm text-muted-foreground mb-4 line-clamp-2">
                     {project.description}
                   </p>
 
@@ -147,7 +170,7 @@ export const PortfolioSection = () => {
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs px-3 py-1 rounded-full bg-secondary text-muted-foreground"
+                        className="text-[10px] px-2.5 py-1 rounded-full bg-secondary text-muted-foreground border border-border/50"
                       >
                         {tag}
                       </span>

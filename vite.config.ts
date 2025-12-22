@@ -2,11 +2,16 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
 
-// IMPORTANT: You are using a custom domain (suraj-tamang.com.np)
-// Therefore, base MUST be "/"  
-// (Only GitHub username pages need a subpath.)
+// GitHub Pages Configuration
+// CUSTOM DOMAIN (www.suraj-tamang.com.np via CNAME):
+//   → base MUST be "/"
+// 
+// WITHOUT custom domain (tamangsura.github.io/Portfolio):
+//   → base would be "/Portfolio/"
+//
+// Since CNAME exists, using base: "/"
 export default defineConfig({
-  base: "/Portfolio",   // ✔ Correct for custom domain
+  base: "/",   // ✅ Correct for custom domain
 
   plugins: [react()],
 

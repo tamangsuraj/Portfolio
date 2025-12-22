@@ -80,38 +80,51 @@ export const ExperienceSection = () => {
           {experiences.map((exp, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 50 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className={`relative flex flex-col md:flex-row gap-8 mb-12 ${
-                index % 2 === 0 ? 'md:flex-row-reverse' : ''
-              }`}
+              initial={{ opacity: 0, y: 30, x: index % 2 === 0 ? 20 : -20 }}
+              animate={isInView ? {
+                opacity: 1,
+                y: 0,
+                x: 0,
+              } : {}}
+              transition={{
+                duration: 0.8,
+                delay: index * 0.1,
+                ease: [0.16, 1, 0.3, 1]
+              }}
+              className={`relative flex flex-col md:flex-row gap-8 mb-12 ${index % 2 === 0 ? 'md:flex-row-reverse' : ''
+                }`}
             >
               {/* Timeline Dot */}
-              <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 border-4 border-background z-10" />
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={isInView ? { scale: 1 } : {}}
+                transition={{ type: "spring", stiffness: 300, damping: 20, delay: 0.4 + index * 0.1 }}
+                className="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full -translate-x-1/2 border-4 border-background z-10"
+              />
 
               {/* Content Card */}
               <div className={`ml-8 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
                 <motion.div
-                  whileHover={{ y: -5 }}
-                  className="glass-card rounded-xl p-6 hover-lift"
+                  whileHover={{ y: -8, scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="glass-card rounded-2xl p-6 border-border/40 hover:border-primary/40 transition-colors"
                 >
                   <div className="flex items-center gap-2 text-primary mb-2">
                     <Calendar className="w-4 h-4" />
-                    <span className="text-sm font-medium">{exp.period}</span>
+                    <span className="text-xs font-bold uppercase tracking-wider">{exp.period}</span>
                   </div>
                   <h3 className="font-heading text-xl font-bold text-foreground mb-1">
                     {exp.title}
                   </h3>
-                  <div className="flex items-center gap-2 text-muted-foreground mb-4">
-                    <Briefcase className="w-4 h-4" />
-                    <span>{exp.company}</span>
+                  <div className="flex items-center gap-2 text-muted-foreground mb-4 opacity-80">
+                    <Briefcase className="w-3.5 h-3.5" />
+                    <span className="text-sm font-medium">{exp.company}</span>
                   </div>
-                  <ul className="space-y-2">
+                  <ul className="space-y-3">
                     {exp.description.map((item, i) => (
-                      <li key={i} className="text-sm text-muted-foreground flex items-start gap-2">
-                        <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0" />
-                        {item}
+                      <li key={i} className="text-sm text-muted-foreground flex items-start gap-3">
+                        <span className="w-1.5 h-1.5 bg-primary/60 rounded-full mt-1.5 flex-shrink-0" />
+                        <span className="leading-relaxed">{item}</span>
                       </li>
                     ))}
                   </ul>

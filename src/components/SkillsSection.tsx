@@ -56,29 +56,35 @@ export const SkillsSection = () => {
             {skills.map((skill, index) => (
               <motion.div
                 key={skill.name}
-                initial={{ opacity: 0, x: -30 }}
+                initial={{ opacity: 0, x: -20 }}
                 animate={isInView ? { opacity: 1, x: 0 } : {}}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.8, delay: index * 0.05, ease: [0.16, 1, 0.3, 1] }}
               >
                 <div className="flex justify-between items-center mb-2">
-                  <div>
-                    <span className="font-medium text-foreground">{skill.name}</span>
-                    <span className="text-xs text-muted-foreground ml-2">
-                      ({skill.category})
+                  <div className="flex items-baseline">
+                    <span className="font-semibold text-foreground">{skill.name}</span>
+                    <span className="text-[10px] uppercase tracking-wider text-muted-foreground ml-3 opacity-70">
+                      {skill.category}
                     </span>
                   </div>
-                  <span className="text-sm text-primary font-medium">{skill.level}%</span>
+                  <span className="text-sm text-primary font-bold">{skill.level}%</span>
                 </div>
-                <div className="h-2 bg-secondary rounded-full overflow-hidden">
+                <div className="h-2.5 bg-secondary/50 rounded-full overflow-hidden border border-border/50">
                   <motion.div
                     initial={{ width: 0 }}
                     animate={isInView ? { width: `${skill.level}%` } : {}}
-                    transition={{ duration: 1, delay: 0.5 + index * 0.1, ease: 'easeOut' }}
-                    className="h-full rounded-full"
+                    transition={{ duration: 1.2, delay: 0.3 + index * 0.05, ease: [0.16, 1, 0.3, 1] }}
+                    className="h-full rounded-full relative"
                     style={{
                       background: `linear-gradient(90deg, hsl(175 80% 50%) 0%, hsl(200 80% 50%) 100%)`,
                     }}
-                  />
+                  >
+                    <motion.div
+                      animate={{ x: ['-100%', '100%'] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                      className="absolute inset-0 bg-white/20 skew-x-12"
+                    />
+                  </motion.div>
                 </div>
               </motion.div>
             ))}
@@ -86,24 +92,38 @@ export const SkillsSection = () => {
 
           {/* Tools Grid */}
           <motion.div
-            initial={{ opacity: 0, x: 30 }}
+            initial={{ opacity: 0, x: 20 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h3 className="font-heading text-xl font-semibold mb-6 text-foreground">
+            <h3 className="font-heading text-xl font-semibold mb-6 text-foreground flex items-center gap-2">
+              <span className="w-8 h-[1px] bg-primary"></span>
               Tools & Technologies
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
               {tools.map((tool, index) => (
                 <motion.div
                   key={tool.name}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={isInView ? { opacity: 1, scale: 1 } : {}}
-                  transition={{ duration: 0.4, delay: 0.6 + index * 0.05 }}
-                  whileHover={{ scale: 1.05, y: -5 }}
-                  className="glass-card rounded-xl p-4 text-center cursor-pointer hover-lift"
+                  initial={{ opacity: 0, scale: 0.9, y: 10 }}
+                  animate={isInView ? {
+                    opacity: 1,
+                    scale: 1,
+                    y: 0,
+                  } : {}}
+                  transition={{
+                    duration: 0.5,
+                    delay: 0.4 + index * 0.05,
+                    ease: [0.16, 1, 0.3, 1]
+                  }}
+                  whileHover={{
+                    scale: 1.05,
+                    y: -5,
+                    transition: { type: "spring", stiffness: 400, damping: 15 }
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  className="glass-card rounded-xl p-4 text-center cursor-pointer border-border/40 hover:border-primary/50 transition-colors"
                 >
-                  <span className="text-3xl mb-2 block">{tool.icon}</span>
+                  <span className="text-3xl mb-2 block filter drop-shadow-sm">{tool.icon}</span>
                   <span className="text-sm font-medium text-foreground">{tool.name}</span>
                 </motion.div>
               ))}

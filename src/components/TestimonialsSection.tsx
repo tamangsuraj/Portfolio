@@ -93,10 +93,13 @@ export const TestimonialsSection = () => {
               <AnimatePresence mode="wait">
                 <motion.div
                   key={current}
-                  initial={{ opacity: 0, x: 50 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  exit={{ opacity: 0, x: -50 }}
-                  transition={{ duration: 0.4 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -20 }}
+                  transition={{
+                    duration: 0.3,
+                    ease: [0.25, 0.1, 0.25, 1] // Custom bezier for smooth entrance
+                  }}
                   className="text-center"
                 >
                   <p className="text-lg md:text-xl text-foreground leading-relaxed mb-8">
@@ -107,12 +110,15 @@ export const TestimonialsSection = () => {
                   <div className="flex items-center justify-center gap-4">
                     <motion.div
                       whileHover={{ scale: 1.1 }}
+                      transition={{ type: "spring", stiffness: 300, damping: 20 }}
                       className="w-14 h-14 rounded-full overflow-hidden"
                     >
-                      <img 
-                        src={testimonials[current].image} 
+                      <img
+                        src={testimonials[current].image}
                         alt={testimonials[current].name}
                         className="w-full h-full object-cover"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </motion.div>
                     <div className="text-left">
@@ -132,7 +138,8 @@ export const TestimonialsSection = () => {
             <div className="flex items-center justify-center gap-4 mt-8">
               <motion.button
                 whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 onClick={prev}
                 className="p-2 rounded-full bg-secondary text-foreground hover:bg-secondary/80 transition-colors"
               >
@@ -145,18 +152,18 @@ export const TestimonialsSection = () => {
                   <button
                     key={index}
                     onClick={() => setCurrent(index)}
-                    className={`w-2 h-2 rounded-full transition-all ${
-                      index === current
-                        ? 'bg-primary w-6'
-                        : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
-                    }`}
+                    className={`w-2 h-2 rounded-full transition-all ${index === current
+                      ? 'bg-primary w-6'
+                      : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                      }`}
                   />
                 ))}
               </div>
 
               <motion.button
                 whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
+                whileTap={{ scale: 0.95 }}
+                transition={{ type: "spring", stiffness: 400, damping: 17 }}
                 onClick={next}
                 className="p-2 rounded-full bg-secondary text-foreground hover:bg-secondary/80 transition-colors"
               >
