@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Redirecting...</title>
+  <script>
+    // GitHub Pages SPA redirect workaround
+    // This script captures the current path and redirects to index.html
+    // with the path stored in the URL hash, which can be read by the app
+    
+    (function() {
+      var redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      
+      if (redirect && redirect !== location.href) {
+        history.replaceState(null, null, redirect);
+      }
+    })();
+    
+    // For direct 404 hits, redirect to index.html with hash
+    (function() {
+      var path = window.location.pathname;
+      
+      if (path && path !== '/') {
+        sessionStorage.redirect = location.href;
+        window.location.replace('/');
+      }
+    })();
+  </script>
+</head>
+<body>
+  <!-- GitHub Pages 404 fallback for SPA routing -->
+</body>
+</html>
