@@ -1,0 +1,188 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-void text-ink font-body antialiased;
+  overflow-x: hidden;
+}
+
+/* custom cursor active: hide the native one everywhere */
+.native-cursor-off,
+.native-cursor-off * {
+  cursor: none !important;
+}
+
+::selection {
+  background: rgba(139, 157, 255, 0.35);
+  color: #fff;
+}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #06080f;
+}
+::-webkit-scrollbar-thumb {
+  background: #1c2138;
+  border-radius: 5px;
+  border: 2px solid #06080f;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2a3154;
+}
+
+/* ---------- film grain over everything ---------- */
+.grain::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  pointer-events: none;
+  z-index: 80;
+  opacity: 0.032;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ---------- glass panel ---------- */
+.glass {
+  background: linear-gradient(160deg, rgba(139, 157, 255, 0.055), rgba(11, 14, 26, 0.55) 38%);
+  border: 1px solid rgba(148, 163, 216, 0.1);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.glass-bright {
+  background: linear-gradient(160deg, rgba(139, 157, 255, 0.1), rgba(11, 14, 26, 0.65) 42%);
+  border: 1px solid rgba(148, 163, 216, 0.2);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* ---------- telemetry eyebrow ---------- */
+.telemetry {
+  @apply font-mono text-[11px] uppercase tracking-telemetry text-faint;
+}
+
+/* ---------- status dot ---------- */
+.status-dot {
+  position: relative;
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  background: #34d399;
+  box-shadow: 0 0 8px rgba(52, 211, 153, 0.8);
+}
+.status-dot::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 9999px;
+  border: 1px solid rgba(52, 211, 153, 0.5);
+  animation: ping-soft 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes ping-soft {
+  0% {
+    transform: scale(0.6);
+    opacity: 1;
+  }
+  80%,
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
+
+/* ---------- animated conic border for featured cards ---------- */
+.beam-border {
+  position: relative;
+}
+.beam-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--beam, 0deg),
+    transparent 0%,
+    rgba(139, 157, 255, 0.9) 8%,
+    transparent 18%,
+    transparent 100%
+  );
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+@property --beam {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+.beam-border:hover::before {
+  opacity: 1;
+  animation: beam-spin 3.2s linear infinite;
+}
+@keyframes beam-spin {
+  to {
+    --beam: 360deg;
+  }
+}
+
+/* ---------- terminal caret ---------- */
+.caret::after {
+  content: "▍";
+  color: #8b9dff;
+  animation: caret-blink 1s steps(1) infinite;
+}
+@keyframes caret-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* ---------- marquee ---------- */
+.marquee-track {
+  animation: marquee 36s linear infinite;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- focus ---------- */
+:focus-visible {
+  outline: 2px solid #8b9dff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
