@@ -5,6 +5,14 @@ import * as THREE from "three";
 const PULSE = new THREE.Color("#8b9dff");
 const DEEP = new THREE.Color("#5b6cff");
 
+interface Control {
+  pointer: { x: number; y: number };
+  dragging: boolean;
+  /** rotation velocity injected by dragging, consumed with inertia */
+  vx: number;
+  vy: number;
+}
+
 /** Fibonacci-sphere node positions with slight radial jitter. */
 function useClusterGeometry(count = 42, radius = 2.15) {
   return useMemo(() => {
@@ -39,7 +47,7 @@ function useClusterGeometry(count = 42, radius = 2.15) {
   }, [count, radius]);
 }
 
-function Cluster({ pointer }: { pointer: React.MutableRefObject<{ x: number; y: number }> }) {
+function Cluster({ control }: { control: React.MutableRefObject<Control> }) {
   const group = useRef<THREE.Group>(null);
   const drift = useRef<THREE.Group>(null);
   const core = useRef<THREE.Mesh>(null);
@@ -50,52 +58,68 @@ function Cluster({ pointer }: { pointer: React.MutableRefObject<{ x: number; y: 
     const d = drift.current;
     if (!g || !d) return;
     const t = state.clock.elapsedTime;
-    g.rotation.y += delta * 0.06;
-    // ease toward pointer for parallax
-    const targetX = pointer.current.y * 0.22;
-    const targetY = pointer.current.x * 0.35;
-    g.rotation.x += (targetX - g.rotation.x) * 0.04;
-    g.rotation.z += (targetY * 0.12 - g.rotation.z) * 0.02;
+    const c = control.current;
+
+    // drag velocity with inertia; gentle auto-spin underneath
+    g.rotation.y += c.vy + delta * 0.06;
+    g.rotation.x += c.vx;
+    g.rotation.x = THREE.MathUtils.clamp(g.rotation.x, -1.1, 1.1);
+    if (!c.dragging) {
+      c.vx *= 0.95;
+      c.vy *= 0.95;
+      // parallax only when the user isn't steering, and only while inertia is quiet
+      if (Math.abs(c.vx) + Math.abs(c.vy) < 0.002) {
+        const targetX = c.pointer.y * 0.22;
+        const targetY = c.pointer.x * 0.35;
+        g.rotation.x += (targetX - g.rotation.x) * 0.02;
+        g.rotation.z += (targetY * 0.12 - g.rotation.z) * 0.02;
+      }
+    }
     d.position.y = Math.sin(t * 0.4) * 0.08;
+
     if (core.current) {
       core.current.rotation.x -= delta * 0.1;
       core.current.rotation.y -= delta * 0.14;
     }
+    // the whole cluster swells slightly while grabbed
+    const targetScale = c.dragging ? 0.86 : 0.82;
+    const s = d.scale.x + (targetScale - d.scale.x) * 0.1;
+    d.scale.setScalar(s);
   });
 
   return (
     <group ref={drift} position={[2.1, 0.1, 0]} scale={0.82}>
       <group ref={group}>
-      <mesh ref={core}>
-        <icosahedronGeometry args={[1.05, 1]} />
-        <meshBasicMaterial color={DEEP} wireframe transparent opacity={0.28} />
-      </mesh>
-      <points>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[positions, 3]} />
-        </bufferGeometry>
-        <pointsMaterial
-          color={PULSE}
-          size={0.055}
-          sizeAttenuation
-          transparent
-          opacity={0.95}
-          blending={THREE.AdditiveBlending}
-          depthWrite={false}
-        />
-      </points>
-      <lineSegments>
-        <bufferGeometry>
-          <bufferAttribute attach="attributes-position" args={[linePositions, 3]} />
-        </bufferGeometry>
-        <lineBasicMaterial
-          color={PULSE}
-          transparent
-          opacity={0.16}
-          blending={THREE.AdditiveBlending}
-          depthWrite={false}
-        />
-      </lineSegments>
+        <mesh ref={core}>
+          <icosahedronGeometry args={[1.05, 1]} />
+          <meshBasicMaterial color={DEEP} wireframe transparent opacity={0.28} />
+        </mesh>
+        <points>
+          <bufferGeometry>
+            <bufferAttribute attach="attributes-position" args={[positions, 3]} />
+          </bufferGeometry>
+          <pointsMaterial
+            color={PULSE}
+            size={0.055}
+            sizeAttenuation
+            transparent
+            opacity={0.95}
+            blending={THREE.AdditiveBlending}
+            depthWrite={false}
+          />
+        </points>
+        <lineSegments>
+          <bufferGeometry>
+            <bufferAttribute attach="attributes-position" args={[linePositions, 3]} />
+          </bufferGeometry>
+          <lineBasicMaterial
+            color={PULSE}
+            transparent
+            opacity={0.16}
+            blending={THREE.AdditiveBlending}
+            depthWrite={false}
+          />
+        </lineSegments>
       </group>
     </group>
   );
@@ -140,20 +164,41 @@ function Dust() {
 }
 
 export default function ClusterScene() {
-  const pointer = useRef({ x: 0, y: 0 });
+  const control = useRef<Control>({ pointer: { x: 0, y: 0 }, dragging: false, vx: 0, vy: 0 });
+  const last = useRef({ x: 0, y: 0 });
 
   return (
     <Canvas
       dpr={[1, 1.75]}
       camera={{ position: [0, 0, 6.2], fov: 42 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      onPointerDown={(e) => {
+        control.current.dragging = true;
+        last.current = { x: e.clientX, y: e.clientY };
+        (e.target as Element).setPointerCapture?.(e.pointerId);
+      }}
+      onPointerUp={() => {
+        control.current.dragging = false;
+      }}
+      onPointerLeave={() => {
+        control.current.dragging = false;
+      }}
       onPointerMove={(e) => {
-        pointer.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-        pointer.current.y = (e.clientY / window.innerHeight) * 2 - 1;
+        const c = control.current;
+        c.pointer.x = (e.clientX / window.innerWidth) * 2 - 1;
+        c.pointer.y = (e.clientY / window.innerHeight) * 2 - 1;
+        if (c.dragging) {
+          const dx = e.clientX - last.current.x;
+          const dy = e.clientY - last.current.y;
+          last.current = { x: e.clientX, y: e.clientY };
+          // steer: horizontal swipe spins yaw, vertical tilts pitch
+          c.vy = THREE.MathUtils.clamp(dx * 0.0045, -0.14, 0.14);
+          c.vx = THREE.MathUtils.clamp(dy * 0.0035, -0.1, 0.1);
+        }
       }}
       style={{ touchAction: "pan-y" }}
     >
-      <Cluster pointer={pointer} />
+      <Cluster control={control} />
       <Dust />
     </Canvas>
   );

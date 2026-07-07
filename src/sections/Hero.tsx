@@ -86,6 +86,7 @@ function SceneMount() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1.6, delay: 0.8 }}
             className="h-full w-full"
+            data-cursor="grow"
           >
             <ClusterScene />
           </motion.div>
