@@ -5,7 +5,7 @@ import { identity, socials } from "../data/content";
 
 export function Contact() {
   return (
-    <section id="contact" className="relative py-28 md:py-40">
+    <section id="contact" className="relative py-20 md:py-40">
       {/* ambient glow behind the closing panel */}
       <div
         aria-hidden

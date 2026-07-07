@@ -24,7 +24,7 @@ function ExperienceCard({
     <article
       ref={ref}
       onPointerMove={onMove}
-      className="group relative overflow-hidden rounded-3xl glass p-7 transition-all duration-300 hover:-translate-y-1 hover:border-pulse/30 md:p-9"
+      className="group relative overflow-hidden rounded-3xl glass p-6 transition-all duration-300 hover:-translate-y-1 hover:border-pulse/30 md:p-9"
     >
       {/* cursor-tracked light */}
       <div
@@ -41,13 +41,13 @@ function ExperienceCard({
         className="absolute left-0 top-7 h-0 w-[3px] rounded-full bg-gradient-to-b from-pulse to-pulse-deep transition-all duration-500 group-hover:h-[calc(100%-3.5rem)] md:top-9 md:group-hover:h-[calc(100%-4.5rem)]"
       />
 
-      <div className="relative grid gap-5 md:grid-cols-[190px_1fr] md:gap-10">
-        <div>
-          <p className="font-display text-xl font-medium text-faint transition-colors duration-300 group-hover:text-dim">
+      <div className="relative grid gap-3 md:grid-cols-[190px_1fr] md:gap-10">
+        <div className="flex items-center gap-3 md:block">
+          <p className="font-display text-base font-medium text-faint transition-colors duration-300 group-hover:text-dim md:text-xl">
             {period}
           </p>
           {status === "running" && (
-            <span className="mt-3 inline-flex items-center gap-2 rounded-full border border-live/30 bg-live/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-live">
+            <span className="inline-flex items-center gap-2 rounded-full border border-live/30 bg-live/10 px-3 py-1 font-mono text-[10px] uppercase tracking-wider text-live md:mt-3">
               <span className="status-dot scale-75" aria-hidden />
               current
             </span>
@@ -55,7 +55,7 @@ function ExperienceCard({
         </div>
 
         <div>
-          <h3 className="font-display text-2xl font-medium text-ink transition-colors duration-300 group-hover:text-pulse md:text-3xl">
+          <h3 className="font-display text-xl font-medium text-ink transition-colors duration-300 group-hover:text-pulse md:text-3xl">
             {role}
           </h3>
           {company && <p className="mt-1.5 text-sm text-dim">{company}</p>}
@@ -80,7 +80,7 @@ function ExperienceCard({
 
 export function Experience() {
   return (
-    <section id="experience" className="relative py-28 md:py-40">
+    <section id="experience" className="relative py-20 md:py-40">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
           index="02"

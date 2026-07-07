@@ -84,7 +84,7 @@ function Diagram({ kind }: { kind: Project["diagram"] }) {
 
 export function Projects() {
   return (
-    <section id="projects" className="relative py-28 md:py-40">
+    <section id="projects" className="relative py-20 md:py-40">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
           index="03"

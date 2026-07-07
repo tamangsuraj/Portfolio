@@ -50,7 +50,7 @@ function useTypedRoles(roles: string[], enabled: boolean) {
   return text;
 }
 
-/** Only mount the WebGL canvas while the hero is on screen, on wide viewports. */
+/** Only mount the WebGL canvas while the hero is on screen. */
 function SceneMount() {
   const holder = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(true);
@@ -75,11 +75,9 @@ function SceneMount() {
     };
   }, []);
 
-  const showCanvas = webgl && wide;
-
   return (
     <div ref={holder} aria-hidden className="absolute inset-0">
-      {showCanvas && visible && (
+      {webgl && visible && (
         <Suspense fallback={null}>
           <motion.div
             initial={{ opacity: 0 }}
@@ -88,11 +86,14 @@ function SceneMount() {
             className="h-full w-full"
             data-cursor="grow"
           >
-            <ClusterScene />
+            {/* dimmed on phones so the headline stays legible over the scene */}
+            <div className="h-full w-full opacity-55 md:opacity-100">
+              <ClusterScene mobile={!wide} key={wide ? "d" : "m"} />
+            </div>
           </motion.div>
         </Suspense>
       )}
-      {!showCanvas && (
+      {!webgl && (
         <div
           className="absolute right-[-10%] top-1/2 h-[70vmin] w-[70vmin] -translate-y-1/2 rounded-full opacity-60"
           style={{
@@ -124,9 +125,12 @@ export function Hero() {
       />
       <SceneMount />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 pt-24 md:px-8">
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 pt-20 md:px-8 md:pt-24">
         {/* boot log */}
-        <div className="mb-10 font-mono text-[11px] leading-6 text-faint sm:text-xs" aria-hidden>
+        <div
+          className="mb-6 font-mono text-[10px] leading-5 text-faint sm:text-xs sm:leading-6 md:mb-10"
+          aria-hidden
+        >
           {BOOT_LINES.map((line, i) => (
             <motion.p
               key={line}
@@ -164,7 +168,7 @@ export function Hero() {
           initial={reduced ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2, ease }}
-          className="mt-4 max-w-xl text-base leading-relaxed text-dim md:text-lg"
+          className="mt-4 max-w-xl text-[15px] leading-relaxed text-dim md:text-lg"
         >
           {identity.tagline}
         </motion.p>
@@ -173,7 +177,7 @@ export function Hero() {
           initial={reduced ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.35, ease }}
-          className="mt-10 flex flex-wrap items-center gap-4"
+          className="mt-8 flex flex-wrap items-center gap-3 md:mt-10 md:gap-4"
         >
           <Magnetic>
             <a
@@ -182,7 +186,7 @@ export function Hero() {
                 e.preventDefault();
                 document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
               }}
-              className="group inline-flex items-center gap-3 rounded-full bg-pulse px-7 py-3.5 font-medium text-void transition-colors hover:bg-ink"
+              className="group inline-flex items-center gap-3 rounded-full bg-pulse px-6 py-3 text-sm font-medium text-void transition-colors hover:bg-ink md:px-7 md:py-3.5 md:text-base"
             >
               View workloads
               <span aria-hidden className="transition-transform group-hover:translate-y-0.5">↓</span>
@@ -192,7 +196,7 @@ export function Hero() {
             <a
               href={identity.resume}
               download="Suraj_Tamang_Resume.pdf"
-              className="inline-flex items-center gap-3 rounded-full glass px-7 py-3.5 font-medium text-ink transition-colors hover:border-pulse/40"
+              className="inline-flex items-center gap-3 rounded-full glass px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-pulse/40 md:px-7 md:py-3.5 md:text-base"
             >
               Download CV
             </a>
@@ -203,7 +207,7 @@ export function Hero() {
           initial={reduced ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.55 }}
-          className="mt-12 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-faint"
+          className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-faint md:mt-12"
         >
           {socials.map((s) => (
             <a

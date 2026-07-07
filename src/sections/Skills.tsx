@@ -5,8 +5,9 @@ import { SectionHeading } from "../components/SectionHeading";
 import { orbitTools, skills } from "../data/content";
 
 const RINGS = [
-  { tools: orbitTools.slice(0, 3), radius: 134, speed: 0.16 },
-  { tools: orbitTools.slice(3), radius: 205, speed: -0.1 },
+  // radius as a fraction of the orbit container's width
+  { tools: orbitTools.slice(0, 3), radius: 0.3, speed: 0.16 },
+  { tools: orbitTools.slice(3), radius: 0.46, speed: -0.1 },
 ];
 
 function Orbit({ frozen }: { frozen: boolean }) {
@@ -18,12 +19,13 @@ function Orbit({ frozen }: { frozen: boolean }) {
     const chips = Array.from(el.querySelectorAll<HTMLElement>("[data-orbit]"));
 
     const place = (t: number) => {
+      const size = el.clientWidth;
       chips.forEach((chip) => {
         const ring = RINGS[Number(chip.dataset.ring)];
         const offset = Number(chip.dataset.offset);
         const angle = offset + t * ring.speed;
-        const x = Math.cos(angle) * ring.radius;
-        const y = Math.sin(angle) * ring.radius;
+        const x = Math.cos(angle) * ring.radius * size;
+        const y = Math.sin(angle) * ring.radius * size;
         chip.style.transform = `translate(-50%, -50%) translate3d(${x}px, ${y}px, 0)`;
       });
     };
@@ -53,13 +55,17 @@ function Orbit({ frozen }: { frozen: boolean }) {
   }, [frozen]);
 
   return (
-    <div ref={root} className="relative mx-auto aspect-square w-full max-w-[420px]" aria-hidden>
+    <div
+      ref={root}
+      className="relative mx-auto aspect-square w-full max-w-[320px] sm:max-w-[420px]"
+      aria-hidden
+    >
       {/* rings */}
       <div className="absolute inset-[18%] rounded-full border border-line" />
       <div className="absolute inset-[2%] rounded-full border border-line" />
       {/* core */}
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <div className="flex h-24 w-24 flex-col items-center justify-center rounded-full glass-bright text-center shadow-[0_0_60px_rgba(91,108,255,0.25)]">
+        <div className="flex h-20 w-20 flex-col items-center justify-center rounded-full glass-bright text-center shadow-[0_0_60px_rgba(91,108,255,0.25)] sm:h-24 sm:w-24">
           <span className="font-mono text-[10px] uppercase tracking-wider text-faint">core</span>
           <span className="font-display text-sm font-medium text-ink">DevOps</span>
         </div>
@@ -71,7 +77,7 @@ function Orbit({ frozen }: { frozen: boolean }) {
             data-orbit
             data-ring={r}
             data-offset={(i / ring.tools.length) * Math.PI * 2}
-            className="absolute left-1/2 top-1/2 whitespace-nowrap rounded-full glass px-3.5 py-1.5 font-mono text-[11px] text-ink shadow-[0_0_24px_rgba(139,157,255,0.12)]"
+            className="absolute left-1/2 top-1/2 whitespace-nowrap rounded-full glass px-2.5 py-1 font-mono text-[10px] text-ink shadow-[0_0_24px_rgba(139,157,255,0.12)] sm:px-3.5 sm:py-1.5 sm:text-[11px]"
             style={{ willChange: "transform" }}
           >
             {tool}
@@ -86,7 +92,7 @@ export function Skills() {
   const reduced = useReducedMotion();
 
   return (
-    <section id="skills" className="relative overflow-hidden py-28 md:py-40">
+    <section id="skills" className="relative overflow-hidden py-20 md:py-40">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
           index="04"
@@ -95,8 +101,8 @@ export function Skills() {
           lede="Proficiency measured the way I measure everything else — honestly, with numbers."
         />
 
-        <div className="grid items-center gap-16 lg:grid-cols-2">
-          <Reveal className="hidden sm:block">
+        <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">
+          <Reveal>
             <Orbit frozen={!!reduced} />
           </Reveal>
 

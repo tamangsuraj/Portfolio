@@ -9,7 +9,7 @@ interface SectionHeadingProps {
 
 export function SectionHeading({ index, channel, title, lede }: SectionHeadingProps) {
   return (
-    <Reveal className="mb-14 md:mb-20 max-w-2xl">
+    <Reveal className="mb-10 md:mb-20 max-w-2xl">
       <p className="telemetry mb-4 flex items-center gap-3">
         <span className="text-pulse">{index}</span>
         <span className="inline-block h-px w-8 bg-line-bright" aria-hidden />

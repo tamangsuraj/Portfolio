@@ -47,7 +47,13 @@ function useClusterGeometry(count = 42, radius = 2.15) {
   }, [count, radius]);
 }
 
-function Cluster({ control }: { control: React.MutableRefObject<Control> }) {
+function Cluster({
+  control,
+  mobile,
+}: {
+  control: React.MutableRefObject<Control>;
+  mobile: boolean;
+}) {
   const group = useRef<THREE.Group>(null);
   const drift = useRef<THREE.Group>(null);
   const core = useRef<THREE.Mesh>(null);
@@ -82,13 +88,18 @@ function Cluster({ control }: { control: React.MutableRefObject<Control> }) {
       core.current.rotation.y -= delta * 0.14;
     }
     // the whole cluster swells slightly while grabbed
-    const targetScale = c.dragging ? 0.86 : 0.82;
+    const base = mobile ? 0.58 : 0.82;
+    const targetScale = c.dragging ? base + 0.04 : base;
     const s = d.scale.x + (targetScale - d.scale.x) * 0.1;
     d.scale.setScalar(s);
   });
 
   return (
-    <group ref={drift} position={[2.1, 0.1, 0]} scale={0.82}>
+    <group
+      ref={drift}
+      position={mobile ? [0, 0.55, 0] : [2.1, 0.1, 0]}
+      scale={mobile ? 0.58 : 0.82}
+    >
       <group ref={group}>
         <mesh ref={core}>
           <icosahedronGeometry args={[1.05, 1]} />
@@ -163,13 +174,13 @@ function Dust() {
   );
 }
 
-export default function ClusterScene() {
+export default function ClusterScene({ mobile = false }: { mobile?: boolean }) {
   const control = useRef<Control>({ pointer: { x: 0, y: 0 }, dragging: false, vx: 0, vy: 0 });
   const last = useRef({ x: 0, y: 0 });
 
   return (
     <Canvas
-      dpr={[1, 1.75]}
+      dpr={mobile ? [1, 1.5] : [1, 1.75]}
       camera={{ position: [0, 0, 6.2], fov: 42 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       onPointerDown={(e) => {
@@ -198,7 +209,7 @@ export default function ClusterScene() {
       }}
       style={{ touchAction: "pan-y" }}
     >
-      <Cluster control={control} />
+      <Cluster control={control} mobile={mobile} />
       <Dust />
     </Canvas>
   );

@@ -4,7 +4,7 @@ import { testimonials } from "../data/content";
 
 export function Signals() {
   return (
-    <section id="signals" className="relative py-28 md:py-40">
+    <section id="signals" className="relative py-20 md:py-40">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
           index="06"

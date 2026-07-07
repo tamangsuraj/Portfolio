@@ -5,7 +5,7 @@ import { about, identity } from "../data/content";
 
 export function About() {
   return (
-    <section id="about" className="relative py-28 md:py-40">
+    <section id="about" className="relative py-20 md:py-40">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
           index="01"
@@ -17,7 +17,7 @@ export function About() {
           <div>
             {about.paragraphs.map((p, i) => (
               <Reveal key={i} delay={i * 0.1}>
-                <p className="mb-6 text-lg leading-relaxed text-dim md:text-xl">{p}</p>
+                <p className="mb-6 text-base leading-relaxed text-dim md:text-xl">{p}</p>
               </Reveal>
             ))}
 
