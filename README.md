@@ -1,8 +1,8 @@
 # Suraj Tamang — Portfolio
 
-Personal portfolio of Suraj Tamang, DevOps Engineer. Designed as a **control plane**: the
-site reads like a beautifully-crafted observability console — terminal boot sequence,
-interactive 3D node cluster, pipeline-styled career timeline, orbital skill system, and
+Personal portfolio of Suraj Tamang, MIS &amp; Business Intelligence. Designed as a **control
+plane**: the site reads like a beautifully-crafted analytics console — terminal boot
+sequence, interactive 3D node cluster, staged career timeline, orbital skill system, and
 glass status-bar navigation with a live clock.
 
 Live at [www.suraj-tamang.com.np](https://www.suraj-tamang.com.np).

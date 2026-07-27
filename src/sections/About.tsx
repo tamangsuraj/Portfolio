@@ -10,7 +10,7 @@ export function About() {
         <SectionHeading
           index="01"
           channel="system overview"
-          title="Infrastructure that gets out of the way."
+          title="Data that reaches the decision."
         />
 
         <div className="grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">

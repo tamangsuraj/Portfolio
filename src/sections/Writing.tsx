@@ -10,7 +10,7 @@ export function Writing() {
           index="05"
           channel="ship logs"
           title="Notes from the field."
-          lede="Guides and lessons from running real infrastructure."
+          lede="Lessons from building dashboards people actually use."
         />
 
         <div className="divide-y divide-line border-y border-line">

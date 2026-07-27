@@ -67,7 +67,7 @@ function Orbit({ frozen }: { frozen: boolean }) {
       <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
         <div className="flex h-20 w-20 flex-col items-center justify-center rounded-full glass-bright text-center shadow-[0_0_60px_rgba(91,108,255,0.25)] sm:h-24 sm:w-24">
           <span className="font-mono text-[10px] uppercase tracking-wider text-faint">core</span>
-          <span className="font-display text-sm font-medium text-ink">DevOps</span>
+          <span className="font-display text-sm font-medium text-ink">Analytics</span>
         </div>
       </div>
       {RINGS.map((ring, r) =>
@@ -98,7 +98,7 @@ export function Skills() {
           index="04"
           channel="stack telemetry"
           title="The tools in constant orbit."
-          lede="Proficiency measured the way I measure everything else — honestly, with numbers."
+          lede="Proficiency reported the way I report everything else — honestly, with numbers."
         />
 
         <div className="grid items-center gap-14 lg:grid-cols-2 lg:gap-16">

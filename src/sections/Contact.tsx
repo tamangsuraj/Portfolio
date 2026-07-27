@@ -18,7 +18,7 @@ export function Contact() {
         <SectionHeading
           index="07"
           channel="open a connection"
-          title="Let's build something reliable."
+          title="Let's turn your data into decisions."
         />
 
         <Reveal>
@@ -36,10 +36,10 @@ export function Contact() {
                 <p className="font-mono text-xs leading-6 text-faint" aria-hidden>
                   $ whoami --availability
                   <br />
-                  <span className="text-live/80">→ open to DevOps & cloud infrastructure work</span>
+                  <span className="text-live/80">→ open to BI, analytics & MIS work</span>
                 </p>
                 <h3 className="mt-6 font-display text-2xl font-medium leading-snug text-ink md:text-3xl">
-                  Have infrastructure that needs taming, or a pipeline that should be faster?
+                  Sitting on data that isn't answering your questions yet?
                 </h3>
                 <div className="mt-9 flex flex-wrap items-center gap-4">
                   <Magnetic>

@@ -8,9 +8,9 @@ const ClusterScene = lazy(() => import("../three/ClusterScene"));
 
 const BOOT_LINES = [
   "$ init suraj-tamang --control-plane",
-  "  cluster ............. online",
+  "  console ............. online",
   "  region .............. ktm / npl · utc+5:45",
-  "  pipelines ........... green",
+  "  dashboards .......... live",
   "ok — rendering interface",
 ];
 
@@ -188,7 +188,7 @@ export function Hero() {
               }}
               className="group inline-flex items-center gap-3 rounded-full bg-pulse px-6 py-3 text-sm font-medium text-void transition-colors hover:bg-ink md:px-7 md:py-3.5 md:text-base"
             >
-              View workloads
+              View projects
               <span aria-hidden className="transition-transform group-hover:translate-y-0.5">↓</span>
             </a>
           </Magnetic>

@@ -85,8 +85,8 @@ export function Experience() {
         <SectionHeading
           index="02"
           channel="career"
-          title="Every role, shipped to production."
-          lede="Where I've worked, and what each chapter changed."
+          title="Every role, and what it changed."
+          lede="From the service floor to the leadership dashboard — the same instinct for what the numbers are saying."
         />
 
         <div className="space-y-5">

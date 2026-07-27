@@ -8,15 +8,15 @@ function Diagram({ kind }: { kind: Project["diagram"] }) {
   const dim = "rgba(139,157,255,0.22)";
   const live = "rgba(52,211,153,0.9)";
 
-  if (kind === "infra") {
+  if (kind === "platform") {
     return (
       <svg viewBox="0 0 280 120" className="h-full w-full" aria-hidden>
         <rect x="110" y="8" width="60" height="24" rx="6" fill="none" stroke={stroke} />
-        <text x="140" y="24" textAnchor="middle" fill={stroke} fontSize="9" fontFamily="monospace">vpc</text>
+        <text x="140" y="24" textAnchor="middle" fill={stroke} fontSize="9" fontFamily="monospace">supabase</text>
         {[
-          { x: 30, label: "eks" },
-          { x: 110, label: "rds" },
-          { x: 190, label: "s3" },
+          { x: 30, label: "enquiry" },
+          { x: 110, label: "booking" },
+          { x: 190, label: "retail" },
         ].map((n) => (
           <g key={n.label}>
             <path d={`M140 32 L${n.x + 30} 66`} stroke={dim} fill="none" />
@@ -27,14 +27,14 @@ function Diagram({ kind }: { kind: Project["diagram"] }) {
           </g>
         ))}
         <text x="140" y="112" textAnchor="middle" fill={dim} fontSize="8" fontFamily="monospace">
-          terraform plan · 0 to destroy
+          role-based access · live
         </text>
       </svg>
     );
   }
 
-  if (kind === "pipeline") {
-    const stages = ["build", "test", "scan", "deploy"];
+  if (kind === "flow") {
+    const stages = ["extract", "clean", "model", "send"];
     return (
       <svg viewBox="0 0 280 120" className="h-full w-full" aria-hidden>
         {stages.map((s, i) => {
@@ -53,7 +53,7 @@ function Diagram({ kind }: { kind: Project["diagram"] }) {
           );
         })}
         <text x="140" y="102" textAnchor="middle" fill={dim} fontSize="8" fontFamily="monospace">
-          4 jobs in parallel · cache hit 94%
+          daily digest · 10:00 am
         </text>
       </svg>
     );
@@ -74,9 +74,9 @@ function Diagram({ kind }: { kind: Project["diagram"] }) {
         strokeWidth="1.5"
       />
       <circle cx="220" cy="30" r="3.5" fill={live} />
-      <text x="232" y="26" fill={live} fontSize="8" fontFamily="monospace">p99 ok</text>
+      <text x="232" y="26" fill={live} fontSize="8" fontFamily="monospace">target hit</text>
       <text x="140" y="114" textAnchor="middle" fill={dim} fontSize="8" fontFamily="monospace">
-        prometheus · 30d retention · alerts quiet
+        12-month conversion trend
       </text>
     </svg>
   );
@@ -88,9 +88,9 @@ export function Projects() {
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
           index="03"
-          channel="workloads"
-          title="Infrastructure, shipped and running."
-          lede="Automation, cloud architecture, and observability systems built end to end."
+          channel="projects"
+          title="Built, shipped, in daily use."
+          lede="Dashboards, reporting automation, and the platform leadership logs into every morning."
         />
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -109,7 +109,20 @@ export function Projects() {
                 </div>
 
                 <div className="flex flex-1 flex-col p-6">
-                  <h3 className="font-display text-xl font-medium text-ink">{project.title}</h3>
+                  <h3 className="font-display text-xl font-medium text-ink">
+                    {project.href ? (
+                      <a
+                        href={project.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="transition-colors hover:text-pulse"
+                      >
+                        {project.title} <span aria-hidden>↗</span>
+                      </a>
+                    ) : (
+                      project.title
+                    )}
+                  </h3>
                   <p className="mt-3 flex-1 text-sm leading-relaxed text-dim">{project.description}</p>
 
                   <dl className="mt-6 grid grid-cols-2 gap-3">

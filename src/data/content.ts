@@ -1,9 +1,9 @@
 export const identity = {
   name: "Suraj Tamang",
   firstName: "Suraj",
-  roles: ["Business Analyst", "DevOps Engineer", "Cloud Automation Specialist"],
+  roles: ["MIS & Business Intelligence", "Business Analyst", "Dashboard Developer"],
   tagline:
-    "Building scalable infrastructure and automating the future of cloud computing. Kubernetes, CI/CD, and everything in between.",
+    "Turning raw sales and operational data into dashboards, forecasts, and decisions leadership can act on.",
   location: "Kathmandu, Nepal",
   remote: "Remote available",
   email: "tamangsuraj003@gmail.com",
@@ -22,18 +22,19 @@ export const socials = [
 
 export const about = {
   paragraphs: [
-    "I'm a DevOps engineer who builds and automates scalable cloud infrastructure. Kubernetes clusters, CI/CD pipelines, cloud platforms — the systems that let teams ship faster and sleep better.",
-    "My approach pairs technical depth with a real understanding of development workflows, so infrastructure accelerates innovation instead of standing in its way.",
+    "I'm an MIS and business intelligence professional who turns messy operational data into something leadership can actually decide from. Dashboards, funnel analysis, executive reporting — the numbers that tell you where the business is really going.",
+    "I sit between the business and the engineers: I read the data, write the requirements, and build the reporting myself when that's the fastest path. The result is insight that arrives before the meeting, not after it.",
   ],
   domains: [
-    { label: "Cloud Architecture", detail: "AWS · GCP · Azure" },
-    { label: "Containerization", detail: "Docker · Kubernetes" },
-    { label: "CI/CD Pipelines", detail: "Jenkins · GitHub Actions" },
-    { label: "Infrastructure as Code", detail: "Terraform · Ansible" },
+    { label: "Business Intelligence", detail: "Power BI · Tableau" },
+    { label: "Sales Analytics", detail: "Funnels · Market Share" },
+    { label: "Data Engineering", detail: "SQL · ETL" },
+    { label: "Full-Stack Dashboards", detail: "React · Supabase" },
   ],
   education: [
     { degree: "BSc (Hons) Computing", school: "Herald College Kathmandu", period: "2021 – 2025" },
     { degree: "Digital Marketing", school: "Mindrisers Institute", period: "2024" },
+    { degree: "Science Stream · GPA 3.25", school: "Herald Secondary School", period: "2022" },
   ],
 };
 
@@ -47,22 +48,27 @@ export interface Experience {
 
 export const experience: Experience[] = [
   {
-    role: "Business Analyst",
-    company: "",
-    period: "Present",
-    status: "running",
-    points: [],
-  },
-  {
-    role: "DevOps Engineer",
-    company: "Wimslab",
-    period: "Present",
+    role: "Management Information System (MIS)",
+    company: "MAW Vriddhi",
+    period: "2026 – Present",
     status: "running",
     points: [
-      "Designed and maintained CI/CD pipelines using Jenkins and GitHub Actions for seamless deployments.",
-      "Automated build, test, and deployment workflows with Docker and Kubernetes.",
-      "Monitored and optimized cloud performance using Grafana and Prometheus to ensure high system availability.",
-      "Implemented Infrastructure as Code with Terraform to streamline and scale server provisioning.",
+      "Act as the company's de facto BI developer — designed and built the full-stack sales intelligence platform with role-based access for the CEO, Sales Head, and HODs.",
+      "Automated the 10 AM executive email report, replacing manual daily compilation with metrics and flagged priority areas.",
+      "Own end-to-end MIS for the Nammi Box, Nammi Vigo, and SERES EV lines, tracking the journey from enquiry through booking to retail.",
+      "Diagnose funnel drop-off and translate it into growth plans that moved lead-to-booking and booking-to-retail ratios.",
+    ],
+  },
+  {
+    role: "MIS Officer",
+    company: "Wimslab",
+    period: "2024 – 2026",
+    status: "complete",
+    points: [
+      "Built interactive Power BI and Tableau dashboards giving management real-time visibility into operational KPIs.",
+      "Tracked campaign performance across Google Ads, Meta Ads, and SEO with daily, weekly, and monthly reporting.",
+      "Built data pipelines consolidating internal systems, improving accuracy and cutting manual reporting effort.",
+      "Standardized data collection processes and reporting templates across the business.",
     ],
   },
   {
@@ -71,9 +77,9 @@ export const experience: Experience[] = [
     period: "2024",
     status: "complete",
     points: [
-      "Achieved a top ranking record in SEO, advertising the Flutter course within 5 days of blog publication.",
-      "Developed interactive themes and content strategy for the organization.",
-      "Demonstrated leadership qualities while still a student.",
+      "Achieved top Google ranking for the 'Flutter Course' keyword within 5 days of blog publication.",
+      "Developed interactive themes and content strategy that lifted engagement and organic traffic.",
+      "Secured the internship before completing the course, and mentored junior peers throughout.",
     ],
   },
   {
@@ -82,9 +88,10 @@ export const experience: Experience[] = [
     period: "2023 – 2024",
     status: "complete",
     points: [
-      "Leveraged analytical skills to optimize processes and ensure data-backed solutions.",
-      "Transformed QA judging strategy, boosting customer satisfaction through data analysis.",
-      "Motivated and guided a team, fostering a collaborative, high-performing environment.",
+      "Handled 200+ customer interactions daily across calls, chats, and email, consistently beating resolution targets.",
+      "Used data analysis and Excel to find process inefficiencies, lifting customer satisfaction scores.",
+      "Transformed the QA evaluation strategy with data-backed performance metrics.",
+      "Mentored and guided a team, fostering a collaborative, high-performing environment.",
     ],
   },
   {
@@ -94,7 +101,7 @@ export const experience: Experience[] = [
     status: "complete",
     points: [
       "Resolved complex customer inquiries and complaints with timely, positive resolutions.",
-      "Managed and motivated a team of customer service representatives.",
+      "Supported the team lead in managing and motivating a group of representatives.",
       "De-escalated challenging situations with empathy and professionalism.",
     ],
   },
@@ -107,48 +114,50 @@ export interface Project {
   description: string;
   stack: string[];
   metrics: { label: string; value: string }[];
-  diagram: "infra" | "pipeline" | "observability";
+  diagram: "platform" | "flow" | "trend";
+  href?: string;
 }
 
 export const projects: Project[] = [
   {
-    id: "aws-infra",
-    title: "AWS Infrastructure Automation",
-    category: "Cloud",
+    id: "sales-intelligence",
+    title: "Sales Intelligence Platform",
+    category: "Platform",
     description:
-      "Complete AWS infrastructure built with Terraform — reusable modules for VPC, EKS, RDS, and a full monitoring stack, provisioned from a single plan.",
-    stack: ["Terraform", "AWS", "EKS", "RDS"],
+      "MAW Vriddhi's full-stack sales intelligence platform, built end to end — role-based logins for the CEO, Sales Head, and HODs to review live enquiry, booking, and retail performance.",
+    stack: ["React", "Vite", "Supabase", "Vercel"],
     metrics: [
-      { label: "provisioning", value: "one command" },
-      { label: "modules", value: "VPC · EKS · RDS" },
+      { label: "access", value: "role-based" },
+      { label: "coverage", value: "enquiry → retail" },
     ],
-    diagram: "infra",
+    diagram: "platform",
+    href: "https://maw-vriddhi-sales.vercel.app",
   },
   {
-    id: "cicd-pipeline",
-    title: "CI/CD Pipeline Optimization",
+    id: "daily-reporting",
+    title: "Automated Executive Reporting",
     category: "Automation",
     description:
-      "Deployment pipelines rebuilt around parallel testing and aggressive caching — cutting release time by 70% while keeping every gate green.",
-    stack: ["GitHub Actions", "Docker", "CI/CD"],
+      "A daily digest that lands in leadership inboxes at 10 AM — key metrics summarised and priority focus areas flagged, removing manual report compilation entirely.",
+    stack: ["SQL", "Supabase", "Automation"],
     metrics: [
-      { label: "deploy time", value: "−70%" },
-      { label: "strategy", value: "parallel + cache" },
+      { label: "delivery", value: "daily · 10:00" },
+      { label: "manual work", value: "eliminated" },
     ],
-    diagram: "pipeline",
+    diagram: "flow",
   },
   {
-    id: "observability",
-    title: "Monitoring & Observability Stack",
-    category: "DevOps",
+    id: "ops-dashboards",
+    title: "Marketing & Ops Dashboard Suite",
+    category: "Analytics",
     description:
-      "Comprehensive monitoring with Prometheus and Grafana — custom dashboards and alerting that surface production issues before customers notice.",
-    stack: ["Prometheus", "Grafana", "AlertManager"],
+      "Power BI and Tableau dashboards tracking campaign performance across Google Ads, Meta Ads, and SEO alongside internal operational KPIs — one place for management to read the business.",
+    stack: ["Power BI", "Tableau", "SQL"],
     metrics: [
-      { label: "detection", value: "before impact" },
-      { label: "dashboards", value: "custom-built" },
+      { label: "cadence", value: "daily · monthly" },
+      { label: "sources", value: "ads · seo · internal" },
     ],
-    diagram: "observability",
+    diagram: "trend",
   },
 ];
 
@@ -159,24 +168,24 @@ export interface Skill {
 }
 
 export const skills: Skill[] = [
-  { name: "Docker", level: 90, category: "Containerization" },
-  { name: "Jenkins", level: 88, category: "CI/CD" },
-  { name: "Kubernetes", level: 85, category: "Orchestration" },
-  { name: "GitHub Actions", level: 85, category: "CI/CD" },
-  { name: "Terraform", level: 82, category: "Infrastructure as Code" },
-  { name: "AWS", level: 80, category: "Cloud Platform" },
+  { name: "Power BI", level: 92, category: "BI & Dashboards" },
+  { name: "Excel (Advanced)", level: 90, category: "Analysis" },
+  { name: "SQL", level: 88, category: "Data & Analytics" },
+  { name: "Dashboard Design", level: 86, category: "Data Visualization" },
+  { name: "Tableau", level: 84, category: "BI & Dashboards" },
+  { name: "Funnel Analysis", level: 84, category: "Sales Analytics" },
   { name: "Python", level: 78, category: "Programming" },
-  { name: "SQL", level: 75, category: "Data & Analytics" },
+  { name: "Full-Stack Development", level: 75, category: "Software" },
 ];
 
 export const orbitTools = [
-  "Docker",
-  "Kubernetes",
-  "Jenkins",
-  "GitHub Actions",
-  "Grafana",
-  "Prometheus",
+  "Power BI",
+  "Tableau",
+  "SQL",
+  "Excel",
   "Python",
+  "React",
+  "Supabase",
   "JavaScript",
 ];
 
@@ -189,46 +198,46 @@ export interface Article {
 
 export const articles: Article[] = [
   {
-    title: "Building a Production-Ready Kubernetes Cluster from Scratch",
+    title: "Designing a Sales Dashboard Executives Will Actually Open",
     excerpt:
-      "A comprehensive guide to setting up Kubernetes with best practices for security, networking, and observability.",
-    category: "Kubernetes",
-    readTime: "12 min",
-  },
-  {
-    title: "GitOps: The Future of Infrastructure Management",
-    excerpt:
-      "How GitOps principles can transform your deployment workflow and improve team collaboration.",
-    category: "GitOps",
-    readTime: "9 min",
-  },
-  {
-    title: "Mastering Terraform: Advanced Patterns & Best Practices",
-    excerpt:
-      "Deep dive into Terraform modules, state management, and strategies for managing complex infrastructure.",
-    category: "IaC",
-    readTime: "15 min",
-  },
-  {
-    title: "Zero-Downtime Deployments with Kubernetes",
-    excerpt:
-      "Strategies and techniques for achieving zero-downtime deployments in Kubernetes environments.",
-    category: "Kubernetes",
+      "Most dashboards die from too many charts. How to pick the handful of numbers leadership needs and lay them out so the answer is obvious.",
+    category: "Power BI",
     readTime: "10 min",
   },
   {
-    title: "Securing Your CI/CD Pipeline: A Complete Guide",
+    title: "Reading the Funnel: From Enquiry to Booking to Retail",
     excerpt:
-      "Essential security practices for protecting your CI/CD pipelines from common vulnerabilities.",
-    category: "Security",
-    readTime: "11 min",
+      "Where deals really leak, how to measure each stage honestly, and how to turn a conversion ratio into a plan someone can act on.",
+    category: "Sales Analytics",
+    readTime: "12 min",
   },
   {
-    title: "Cost Optimization Strategies for AWS Infrastructure",
+    title: "Data Modeling for Messy Source Systems",
     excerpt:
-      "Practical tips and tools for reducing your AWS bill without compromising performance.",
-    category: "AWS",
+      "Star schemas, date tables, and the modeling decisions that stop your reports from disagreeing with each other six months in.",
+    category: "Data Modeling",
+    readTime: "14 min",
+  },
+  {
+    title: "Automating the Daily Report Nobody Wants to Write",
+    excerpt:
+      "Replacing manual morning compilation with a scheduled digest that summarises the metrics and flags what needs attention.",
+    category: "Automation",
     readTime: "8 min",
+  },
+  {
+    title: "Market Share vs. Regional Market Share",
+    excerpt:
+      "The national number hides the story. Why regional breakdowns change strategy, and how to build the view that surfaces it.",
+    category: "Strategy",
+    readTime: "9 min",
+  },
+  {
+    title: "Writing Requirements Engineers Can Actually Build From",
+    excerpt:
+      "The translation layer between business questions and technical specs — what to write down, and what to leave to the team.",
+    category: "BI Practice",
+    readTime: "11 min",
   },
 ];
 
@@ -246,31 +255,31 @@ export const testimonials: Testimonial[] = [
     role: "Software Developer",
     company: "Tech Innovators",
     quote:
-      "Suraj transformed our deployment process completely. What used to take hours now happens in minutes with zero downtime. His expertise in Kubernetes is unmatched.",
+      "Suraj gave us visibility we simply didn't have. What used to be a week of manual spreadsheet work is now a dashboard the whole team reads every morning.",
     photo: "/testimonial-ayush.png",
   },
   {
     name: "Pramod Gurung",
-    role: "Engineering Manager",
-    company: "CloudScale Nepal",
+    role: "Sales Head",
+    company: "Everest Retail",
     quote:
-      "Working with Suraj on our cloud infrastructure was a game-changer. He helped us reduce costs significantly while improving performance. Highly recommended!",
+      "He found the exact points where our funnel was leaking and put numbers behind them. The recommendations that followed moved our booking-to-retail ratio.",
     photo: "/testimonial-pramod.png",
   },
   {
     name: "Mingma Sherpa",
-    role: "DevOps Lead",
+    role: "Operations Lead",
     company: "DataPrime",
     quote:
-      "Suraj's approach to CI/CD automation saved our team countless hours. His documentation and knowledge transfer made adoption seamless.",
+      "Suraj's automated reporting saved our leadership team hours every week. The daily digest is the first thing everyone opens.",
     photo: "/testimonial-mingma.png",
   },
   {
     name: "Bipin Yogi",
-    role: "VP of Engineering",
+    role: "Head of Marketing",
     company: "InnovateTech",
     quote:
-      "The monitoring and observability stack Suraj implemented gave us visibility we never had before. Production issues are now caught before customers notice.",
+      "He translates between business and engineering better than anyone I've worked with. We finally got requirements the developers could build from directly.",
     photo: "/testimonial-bipin.png",
   },
 ];
@@ -278,8 +287,8 @@ export const testimonials: Testimonial[] = [
 export const sections = [
   { id: "hero", label: "boot" },
   { id: "about", label: "system" },
-  { id: "experience", label: "deploys" },
-  { id: "projects", label: "workloads" },
+  { id: "experience", label: "career" },
+  { id: "projects", label: "projects" },
   { id: "skills", label: "stack" },
   { id: "writing", label: "logs" },
   { id: "signals", label: "signals" },
