@@ -1,3 +1,4 @@
+import { BriefForm } from "../components/BriefForm";
 import { Magnetic } from "../components/Magnetic";
 import { Reveal } from "../components/Reveal";
 import { SectionHeading } from "../components/SectionHeading";
@@ -41,23 +42,15 @@ export function Contact() {
                 <h3 className="mt-6 font-display text-2xl font-medium leading-snug text-ink md:text-3xl">
                   Sitting on data that isn't answering your questions yet?
                 </h3>
-                <div className="mt-9 flex flex-wrap items-center gap-4">
+                <BriefForm />
+
+                <div className="mt-6">
                   <Magnetic>
                     <a
                       href={`mailto:${identity.email}`}
-                      className="inline-flex items-center gap-3 rounded-full bg-pulse px-7 py-3.5 font-medium text-void transition-colors hover:bg-ink"
+                      className="inline-flex items-center gap-3 rounded-full glass px-7 py-3.5 font-medium text-ink transition-colors hover:border-pulse/40"
                     >
                       {identity.email}
-                    </a>
-                  </Magnetic>
-                  <Magnetic>
-                    <a
-                      href={identity.contactForm}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 rounded-full glass px-7 py-3.5 font-medium text-ink transition-colors hover:border-pulse/40"
-                    >
-                      Send a brief <span aria-hidden>↗</span>
                     </a>
                   </Magnetic>
                 </div>

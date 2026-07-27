@@ -9,8 +9,10 @@ export const identity = {
   email: "tamangsuraj003@gmail.com",
   phone: "+977 9761667516",
   resume: "/Resume.pdf",
-  contactForm:
-    "https://docs.google.com/forms/d/e/1FAIpQLSdWskCw9VqcXpJD4uP-yhnuRgdSF9uqqxbJ1IGjZexph6WyIw/viewform?usp=header",
+  // FormSubmit delivers straight to the inbox below — no backend, no account.
+  // Swap the address for the masked token from the activation email to keep it
+  // out of the page source: https://formsubmit.co/ajax/<token>
+  formEndpoint: "https://formsubmit.co/ajax/tamangsuraj003@gmail.com",
 };
 
 export const socials = [
