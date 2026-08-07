@@ -1,14 +1,35 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
+# robots.txt — https://www.suraj-tamang.com.np
+#
+# The previous version listed five per-bot groups that each said "Allow: /".
+# Crawlers obey the single most specific matching group, so those blocks did
+# nothing except hide the fact that no Sitemap directive was present. This
+# version is one open group plus the sitemap reference that actually matters.
 
 User-agent: *
 Allow: /
+
+# Build artefacts and route-data manifests — no reason to spend crawl budget.
+Disallow: /assets/
+Disallow: /static-loader-data-manifest-*.json
+Disallow: /404/
+
+# AI and answer-engine crawlers are allowed deliberately.
+# Being cited in AI Overviews, ChatGPT and Perplexity is increasingly how a
+# personal brand gets discovered, and there is nothing here worth withholding.
+# See /llms.txt for a plain-text summary written for these agents.
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://www.suraj-tamang.com.np/sitemap.xml

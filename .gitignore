@@ -3,3 +3,9 @@ dist
 *.local
 .DS_Store
 _legacy-site/
+
+# TypeScript incremental build artifacts
+*.tsbuildinfo
+
+# Vercel
+.vercel

@@ -1,0 +1,19 @@
+{
+  "name": "Suraj Tamang — Business Intelligence & Web Developer, Nepal",
+  "short_name": "Suraj Tamang",
+  "description": "MIS and business intelligence analyst in Kathmandu. Dashboards, reporting automation, and websites for businesses across Nepal.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#06080F",
+  "theme_color": "#06080F",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

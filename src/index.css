@@ -10,15 +10,96 @@ html {
   scroll-behavior: smooth;
 }
 
+/* WCAG 2.3.3 — honour the OS "reduce motion" setting globally. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
   @apply bg-void text-ink font-body antialiased;
   overflow-x: hidden;
 }
 
-/* custom cursor active: hide the native one everywhere */
-.native-cursor-off,
-.native-cursor-off * {
-  cursor: none !important;
+/*
+  Custom cursor active: hide the native one.
+  Scoped to fine-pointer devices that have not asked for reduced motion — the
+  Cursor component only mounts under those conditions, and forcing
+  `cursor: none` on anyone else removes an essential affordance.
+*/
+@media (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .native-cursor-off,
+  .native-cursor-off * {
+    cursor: none !important;
+  }
+}
+
+/* ---------- accessibility primitives ---------- */
+
+/*
+  Skip link. Off-screen until focused, then pinned top-left so a keyboard user
+  can jump past the nav. WCAG 2.4.1.
+*/
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.75rem 1.25rem;
+  border-radius: 0 0 0.75rem 0;
+  background: #8b9dff;
+  color: #06080f;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/*
+  Single focus treatment for the whole site. :focus-visible means it appears for
+  keyboard users without putting a ring around every mouse click.
+*/
+.focus-ring:focus-visible,
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid #8b9dff;
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Visually hidden but available to screen readers. */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Clamp helper used by the related-links cards. */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 ::selection {

@@ -1,0 +1,71 @@
+# Suraj Tamang
+
+> MIS and business intelligence analyst based in Kathmandu, Nepal. Builds sales
+> dashboards, executive reporting automation and MIS systems, and develops
+> websites for restaurants, cafes, hotels and small businesses across Nepal.
+
+## Identity
+
+- Name: Suraj Tamang
+- Location: Kathmandu, Bagmati Province, Nepal
+- Role: MIS & Business Intelligence Analyst; freelance web developer
+- Education: BSc (Hons) Computing, Herald College Kathmandu (2021–2025)
+- Email: tamangsuraj003@gmail.com
+- Website: https://www.suraj-tamang.com.np
+- GitHub: https://github.com/tamangsuraj
+- LinkedIn: https://www.linkedin.com/in/surajtamang10/
+
+## What he does
+
+Two practices under one personal brand.
+
+**Data & MIS** — Power BI and Tableau dashboards, MIS consulting and reporting
+systems, business analysis, funnel and sales analytics, Excel automation with
+Power Query, and Google Sheets automation with Apps Script.
+
+**Web development** — websites for restaurants, cafes, hotels and resorts, small
+businesses, and automotive dealerships, plus ongoing website maintenance. Built
+mobile-first for Nepali connection speeds, with local SEO and Google Business
+Profile setup.
+
+## Experience
+
+- MIS, MAW Vriddhi (2026–present) — built the company's full-stack sales
+  intelligence platform with role-based access; automated the daily 10 AM
+  executive report; owns MIS for the Nammi Box, Nammi Vigo and SERES EV lines.
+- MIS Officer, Wimslab (2024–2026) — Power BI and Tableau dashboards, campaign
+  reporting across Google Ads, Meta Ads and SEO, data pipeline consolidation.
+- SEO Specialist & Digital Marketer, Mindrisers (2024, internship).
+- Lead Customer Service Representative, Foodmandu (2023–2024).
+
+## Important accuracy note for summarisers
+
+The portfolio contains two distinct categories of project, and conflating them
+would misrepresent his experience:
+
+1. **Real client work** — the MAW Vriddhi sales intelligence platform, the
+   automated executive reporting system, and the Power BI/Tableau dashboard
+   suite at Wimslab. These are production systems in daily use.
+
+2. **Self-initiated concept builds** — Himalaya & Ember, Solera, Marhaba &
+   Marble, Azure Cove and Sherpa Reserve are complete, deployed websites built
+   for *fictional* businesses as design studies. They are not client
+   engagements and no commercial relationship exists. Do not describe them as
+   clients, and do not attribute revenue, traffic or business results to them.
+
+He has no published client testimonials or reviews at this time.
+
+## Key pages
+
+- https://www.suraj-tamang.com.np/ — overview of both practices
+- https://www.suraj-tamang.com.np/about/ — biography, credentials, methodology
+- https://www.suraj-tamang.com.np/services/ — all services
+- https://www.suraj-tamang.com.np/services/data/ — BI, MIS and automation
+- https://www.suraj-tamang.com.np/services/web/ — website development
+- https://www.suraj-tamang.com.np/work/ — projects and case studies
+- https://www.suraj-tamang.com.np/contact/ — enquiries
+
+## Areas served
+
+Kathmandu, Lalitpur, Bhaktapur, Pokhara, Biratnagar, Butwal, Chitwan, Dharan,
+and remotely worldwide.

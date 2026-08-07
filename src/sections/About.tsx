@@ -1,3 +1,4 @@
+import { Picture } from "../components/Picture";
 import { Reveal } from "../components/Reveal";
 import { SectionHeading } from "../components/SectionHeading";
 import { TiltCard } from "../components/TiltCard";
@@ -5,10 +6,11 @@ import { about, identity } from "../data/content";
 
 export function About() {
   return (
-    <section id="about" className="relative py-20 md:py-40">
+    <section id="about" className="relative py-20 md:py-40" aria-labelledby="about-heading">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
-          index="01"
+          id="about-heading"
+          index="02"
           channel="system overview"
           title="Data that reaches the decision."
         />
@@ -51,14 +53,14 @@ export function About() {
             ))}
             <Reveal delay={0.45} className="sm:col-span-2">
               <div className="flex items-center gap-4 rounded-2xl glass p-5">
-                <img
-                  src="/profile.png"
-                  alt={identity.name}
+                <Picture
+                  name="profile"
+                  alt={`${identity.name} — MIS and business intelligence analyst, Kathmandu`}
+                  widths={[240]}
+                  sizes="56px"
                   width={56}
                   height={56}
-                  loading="lazy"
-                  decoding="async"
-                  className="h-14 w-14 rounded-full object-cover ring-1 ring-line-bright"
+                  className="h-14 w-14 shrink-0 rounded-full object-cover ring-1 ring-line-bright"
                 />
                 <div className="min-w-0">
                   <p className="font-medium text-ink">{identity.name}</p>

@@ -1,8 +1,9 @@
 import { motion, useReducedMotion } from "framer-motion";
 import { lazy, Suspense, useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import { Magnetic } from "../components/Magnetic";
 import { useCapabilities } from "../hooks/useCapabilities";
-import { identity, socials, orbitTools } from "../data/content";
+import { identity, orbitTools, socials } from "../data/content";
 
 const ClusterScene = lazy(() => import("../three/ClusterScene"));
 
@@ -15,7 +16,7 @@ const BOOT_LINES = [
 ];
 
 function useTypedRoles(roles: string[], enabled: boolean) {
-  const [text, setText] = useState(enabled ? "" : roles[0]);
+  const [text, setText] = useState(roles[0]);
   useEffect(() => {
     if (!enabled) return;
     let role = 0;
@@ -54,19 +55,19 @@ function useTypedRoles(roles: string[], enabled: boolean) {
 function SceneMount() {
   const holder = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(true);
-  const [wide, setWide] = useState(
-    () => typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches,
-  );
+  const [wide, setWide] = useState(false);
   const { webgl } = useCapabilities();
 
   useEffect(() => {
     const el = holder.current;
     if (!el) return;
+    const mq = window.matchMedia("(min-width: 768px)");
+    setWide(mq.matches);
+
     const obs = new IntersectionObserver(([e]) => setVisible(e.isIntersecting), {
       rootMargin: "120px",
     });
     obs.observe(el);
-    const mq = window.matchMedia("(min-width: 768px)");
     const onMq = () => setWide(mq.matches);
     mq.addEventListener("change", onMq);
     return () => {
@@ -113,8 +114,7 @@ export function Hero() {
   const ease = [0.22, 1, 0.36, 1] as const;
 
   return (
-    <section id="hero" className="relative flex min-h-svh flex-col overflow-hidden">
-      {/* ambient field */}
+    <section className="relative flex min-h-svh flex-col overflow-hidden">
       <div
         aria-hidden
         className="absolute inset-0"
@@ -125,8 +125,7 @@ export function Hero() {
       />
       <SceneMount />
 
-      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 pt-20 md:px-8 md:pt-24">
-        {/* boot log */}
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col justify-center px-5 pt-24 md:px-8 md:pt-28">
         <div
           className="mb-6 font-mono text-[10px] leading-5 text-faint sm:text-xs sm:leading-6 md:mb-10"
           aria-hidden
@@ -144,15 +143,24 @@ export function Hero() {
           ))}
         </div>
 
+        {/*
+          The H1 carries the name AND what he does. The previous version was
+          just "Suraj Tamang." — perfect branding, zero keyword surface. The
+          name still leads (it is the highest-intent query), but the descriptor
+          gives Google something to match for the role and location queries.
+          The visual line break is decorative only; the sentence reads normally
+          to a crawler and a screen reader.
+        */}
         <motion.h1
           initial={reduced ? false : { opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.85, ease }}
-          className="font-display text-[13vw] font-semibold leading-[0.95] tracking-tight sm:text-7xl md:text-8xl lg:text-[7.5rem]"
+          className="font-display text-[12vw] font-semibold leading-[0.95] tracking-tight sm:text-6xl md:text-7xl lg:text-[6.5rem]"
         >
-          Suraj
-          <br />
-          Tamang<span className="text-pulse">.</span>
+          Suraj Tamang<span className="text-pulse">.</span>
+          <span className="mt-3 block text-[5.5vw] font-medium leading-tight text-dim sm:text-3xl md:text-4xl lg:text-5xl">
+            Business intelligence &amp; websites, built in Kathmandu.
+          </span>
         </motion.h1>
 
         <motion.p
@@ -161,14 +169,15 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 1.05, ease }}
           className="mt-6 h-7 font-mono text-sm text-pulse sm:text-base"
         >
-          <span className="text-faint">·/</span> <span className={reduced ? "" : "caret"}>{role}</span>
+          <span className="text-faint">·/</span>{" "}
+          <span className={reduced ? "" : "caret"}>{role}</span>
         </motion.p>
 
         <motion.p
           initial={reduced ? false : { opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.2, ease }}
-          className="mt-4 max-w-xl text-[15px] leading-relaxed text-dim md:text-lg"
+          className="mt-4 max-w-2xl text-[15px] leading-relaxed text-dim md:text-lg"
         >
           {identity.tagline}
         </motion.p>
@@ -180,56 +189,63 @@ export function Hero() {
           className="mt-8 flex flex-wrap items-center gap-3 md:mt-10 md:gap-4"
         >
           <Magnetic>
-            <a
-              href="#projects"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" });
-              }}
-              className="group inline-flex items-center gap-3 rounded-full bg-pulse px-6 py-3 text-sm font-medium text-void transition-colors hover:bg-ink md:px-7 md:py-3.5 md:text-base"
+            <Link
+              to="/contact/"
+              className="focus-ring group inline-flex items-center gap-3 rounded-full bg-pulse px-6 py-3 text-sm font-medium text-void transition-colors hover:bg-ink md:px-7 md:py-3.5 md:text-base"
             >
-              View projects
-              <span aria-hidden className="transition-transform group-hover:translate-y-0.5">↓</span>
-            </a>
+              Start a project
+              <span aria-hidden className="transition-transform group-hover:translate-x-0.5">
+                →
+              </span>
+            </Link>
           </Magnetic>
           <Magnetic>
-            <a
-              href={identity.resume}
-              download="Suraj_Tamang_Resume.pdf"
-              className="inline-flex items-center gap-3 rounded-full glass px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-pulse/40 md:px-7 md:py-3.5 md:text-base"
+            <Link
+              to="/work/"
+              className="focus-ring glass inline-flex items-center gap-3 rounded-full px-6 py-3 text-sm font-medium text-ink transition-colors hover:border-pulse/40 md:px-7 md:py-3.5 md:text-base"
             >
-              Download CV
-            </a>
+              See the work
+            </Link>
           </Magnetic>
+          <a
+            href={identity.resume}
+            download="Suraj_Tamang_Resume.pdf"
+            className="focus-ring rounded-full px-2 py-3 font-mono text-xs text-faint transition-colors hover:text-pulse"
+          >
+            download cv ↓
+          </a>
         </motion.div>
 
-        <motion.div
+        <motion.ul
           initial={reduced ? false : { opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.55 }}
           className="mt-8 flex flex-wrap gap-x-6 gap-y-2 font-mono text-xs text-faint md:mt-12"
         >
           {socials.map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="transition-colors hover:text-pulse"
-            >
-              {s.label.toLowerCase()}
-              <span className="text-line-bright"> ↗</span>
-            </a>
+            <li key={s.label}>
+              <a
+                href={s.href}
+                target="_blank"
+                rel="me noopener noreferrer"
+                className="focus-ring rounded transition-colors hover:text-pulse"
+              >
+                {s.label.toLowerCase()}
+                <span aria-hidden className="text-line-bright">
+                  {" "}
+                  ↗
+                </span>
+              </a>
+            </li>
           ))}
-        </motion.div>
+        </motion.ul>
       </div>
 
-      {/* tool marquee */}
       <motion.div
         initial={reduced ? false : { opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.8 }}
-        className="relative z-10 border-t border-line py-5 overflow-hidden"
+        className="relative z-10 overflow-hidden border-t border-line py-5"
         aria-hidden
       >
         <div className="marquee-track flex w-max gap-12 whitespace-nowrap font-mono text-xs text-faint">

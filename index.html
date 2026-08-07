@@ -3,44 +3,39 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Suraj Tamang — MIS &amp; Business Intelligence</title>
-    <meta
-      name="description"
-      content="Suraj Tamang is an MIS and business intelligence professional in Kathmandu building sales intelligence dashboards, executive reporting, and funnel analytics in Power BI, Tableau, and SQL."
-    />
-    <meta name="author" content="Suraj Tamang" />
-    <meta
-      name="keywords"
-      content="Business Intelligence, MIS, Business Analyst, Power BI, Tableau, SQL, Data Analytics, Dashboard Developer, Kathmandu"
-    />
-    <link rel="canonical" href="https://www.suraj-tamang.com.np" />
 
-    <meta property="og:title" content="Suraj Tamang — MIS &amp; Business Intelligence" />
-    <meta
-      property="og:description"
-      content="Sales intelligence dashboards, executive reporting, and funnel analytics. Power BI, Tableau, SQL."
+    <!-- No title/description here by design — see src/seo/Seo.tsx. -->
+
+    <!--
+      Self-hosted fonts. Preload only the two faces used above the fold: the
+      display face for the H1 and the body face for the tagline. Preloading all
+      eight would compete for bandwidth with the LCP element itself.
+    -->
+    <link
+      rel="preload"
+      href="/fonts/clash-display-600.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
     />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://www.suraj-tamang.com.np" />
-    <meta name="twitter:card" content="summary" />
+    <link rel="preload" href="/fonts/satoshi-400.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/fonts/fonts.css" />
 
     <meta name="theme-color" content="#06080F" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
 
-    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Feed autodiscovery: lets readers and some crawlers find the blog feed. -->
     <link
-      href="https://api.fontshare.com/v2/css?f[]=clash-display@500,600,700&f[]=satoshi@400,500,700&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
+      rel="alternate"
+      type="application/rss+xml"
+      title="Suraj Tamang — Blog"
+      href="/rss.xml"
     />
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root"><!--app-html--></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

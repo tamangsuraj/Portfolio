@@ -92,10 +92,11 @@ export function Skills() {
   const reduced = useReducedMotion();
 
   return (
-    <section id="skills" className="relative overflow-hidden py-20 md:py-40">
+    <section id="skills" className="relative overflow-hidden py-20 md:py-40" aria-labelledby="skills-heading">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
-          index="04"
+          id="skills-heading"
+          index="05"
           channel="stack telemetry"
           title="The tools in constant orbit."
           lede="Proficiency reported the way I report everything else — honestly, with numbers."

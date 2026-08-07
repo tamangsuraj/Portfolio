@@ -1,4 +1,4 @@
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { identity } from "../data/content";
 
 type Status = "idle" | "sending" | "sent" | "error";
@@ -13,6 +13,14 @@ const label = "mb-1.5 block font-mono text-[10px] uppercase tracking-wider text-
 export function BriefForm() {
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
+  const successRef = useRef<HTMLDivElement>(null);
+
+  // On success the form is replaced by a confirmation panel. Without moving
+  // focus, a screen-reader or keyboard user is left pointing at a node that no
+  // longer exists and gets no indication anything happened.
+  useEffect(() => {
+    if (status === "sent") successRef.current?.focus();
+  }, [status]);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -53,10 +61,14 @@ export function BriefForm() {
 
   if (status === "sent") {
     return (
-      <div className="mt-9 rounded-2xl border border-live/25 bg-live/[0.06] p-6">
-        <p className="font-mono text-xs leading-6 text-live">
-          → brief received
-        </p>
+      <div
+        ref={successRef}
+        role="status"
+        aria-live="polite"
+        tabIndex={-1}
+        className="mt-9 rounded-2xl border border-live/25 bg-live/[0.06] p-6 outline-none"
+      >
+        <p className="font-mono text-xs leading-6 text-live">→ brief received</p>
         <p className="mt-2 text-sm leading-relaxed text-dim">
           Thanks — it's in my inbox. I'll get back to you at the address you gave me.
         </p>
@@ -81,7 +93,7 @@ export function BriefForm() {
         name="_honey"
         tabIndex={-1}
         autoComplete="off"
-        aria-hidden
+        aria-hidden="true"
         className="hidden"
       />
 
@@ -141,7 +153,7 @@ export function BriefForm() {
           required
           rows={4}
           disabled={busy}
-          placeholder="What are you trying to find out from your data?"
+          placeholder="What does the business do, and what do you want to happen? A couple of sentences is plenty."
           className={`${field} resize-y`}
         />
       </div>
@@ -160,7 +172,7 @@ export function BriefForm() {
         </span>
       </div>
 
-      <p aria-live="polite" className="min-h-[1.25rem]">
+      <p role="alert" aria-live="assertive" className="min-h-[1.25rem]">
         {status === "error" && (
           <span className="font-mono text-xs text-ember">
             → couldn't send: {error}. Email me at {identity.email} instead.

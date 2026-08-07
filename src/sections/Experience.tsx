@@ -80,10 +80,11 @@ function ExperienceCard({
 
 export function Experience() {
   return (
-    <section id="experience" className="relative py-20 md:py-40">
+    <section id="experience" className="relative py-20 md:py-40" aria-labelledby="experience-heading">
       <div className="mx-auto max-w-7xl px-5 md:px-8">
         <SectionHeading
-          index="02"
+          id="experience-heading"
+          index="04"
           channel="career"
           title="Every role, and what it changed."
           lede="From the service floor to the leadership dashboard — the same instinct for what the numbers are saying."
