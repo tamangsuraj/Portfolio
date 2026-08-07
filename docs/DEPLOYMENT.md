@@ -139,3 +139,33 @@ If you later want the FormSubmit address out of the page source, activate a mask
 token and change `identity.formEndpoint` in `src/data/content.ts` to
 `https://formsubmit.co/ajax/<token>`. It's a mild anti-scraping measure, not
 security — the endpoint is public either way.
+
+---
+
+## Gotcha: redirects and `trailingSlash`
+
+`vercel.json` sets `"trailingSlash": true`. Vercel normalises the request path
+**before** evaluating `redirects`, so a rule written as:
+
+```json
+{ "source": "/projects", "destination": "/work/" }
+```
+
+never fires — by the time redirects are checked, the request is already
+`/projects/`, which does not match `/projects`. The result is a 308 to
+`/projects/` followed by a 404.
+
+**Write every redirect source with a trailing slash.** The one exception is a
+real file path such as `/index.html`, which is not normalised.
+
+Verify after any redirect change:
+
+```bash
+for p in /projects /portfolio /resume /cv; do
+  curl -sL -o /dev/null -w "$p -> %{url_effective} (%{http_code})\n" https://<host>$p
+done
+```
+
+Also: never add a redirect whose destination is a route still marked
+`published: false`. A 301 into a 404 is a worse signal than leaving the URL
+unhandled.

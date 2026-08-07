@@ -9,3 +9,6 @@ _legacy-site/
 
 # Vercel
 .vercel
+
+.vercel
+.env*

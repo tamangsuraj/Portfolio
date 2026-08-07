@@ -4,7 +4,6 @@
   "outputDirectory": "dist",
   "framework": null,
   "trailingSlash": true,
-
   "redirects": [
     {
       "source": "/index.html",
@@ -12,49 +11,36 @@
       "permanent": true
     },
     {
-      "source": "/home",
+      "source": "/home/",
       "destination": "/",
       "permanent": true
     },
-
     {
-      "source": "/projects",
+      "source": "/projects/",
       "destination": "/work/",
       "permanent": true
     },
     {
-      "source": "/portfolio",
+      "source": "/portfolio/",
       "destination": "/work/",
       "permanent": true
     },
     {
-      "source": "/resume",
+      "source": "/resume/",
       "destination": "/about/",
       "permanent": true
     },
     {
-      "source": "/cv",
+      "source": "/cv/",
       "destination": "/about/",
       "permanent": true
     },
-
     {
-      "source": "/services/data/dashboards",
+      "source": "/services/data/dashboards/",
       "destination": "/services/data/",
-      "permanent": true
-    },
-    {
-      "source": "/services/restaurant-website-development",
-      "destination": "/services/web/restaurant-website-development/",
-      "permanent": true
-    },
-    {
-      "source": "/services/power-bi-dashboard-development",
-      "destination": "/services/data/power-bi-dashboard-development/",
       "permanent": true
     }
   ],
-
   "headers": [
     {
       "source": "/assets/(.*)",
@@ -169,6 +155,5 @@
       ]
     }
   ],
-
   "cleanUrls": false
 }
